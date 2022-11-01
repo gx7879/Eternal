@@ -1,9 +1,12 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'wallet-connect',
+    title: 'Eternal',
     htmlAttrs: {
       lang: 'en',
+    },
+    bodyAttrs: {
+      class: 'bg-[#121117]'
     },
     meta: [
       { charset: 'utf-8' },

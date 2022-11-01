@@ -1,4 +1,4 @@
-# wallet-connect
+# Eternal
 
 ## Build Setup
 
