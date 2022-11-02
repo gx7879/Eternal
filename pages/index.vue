@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-white">
     <div v-if="fetching">
       <!-- <button
         class="border-2 border-blue-300 rounded px-3 py-1"
@@ -62,6 +62,11 @@
         basicMint
       </button>
     </template>
+    <div
+      class="flex bg-[url(~/assets/images/titlebox_bg_phone.png)] bg-cover px-16 py-3"
+    >
+      NFT簡介
+    </div>
   </div>
 </template>
 
@@ -69,7 +74,11 @@
 import Web3, { utils } from 'web3'
 import Web3Modal from 'web3modal'
 import { USDT_ABI, NFT_ABI } from '@/web3/abi'
-import { providerOptions, USDT_CONTRACT_ADDRESS, NFT_CONTRACT_ADDRESS } from '@/web3/config'
+import {
+  providerOptions,
+  USDT_CONTRACT_ADDRESS,
+  NFT_CONTRACT_ADDRESS,
+} from '@/web3/config'
 import { getChainData } from '@/web3/tools'
 // import UseWallet from '@/composables/wallet'
 // const { onConnect } = UseWallet()
@@ -111,7 +120,9 @@ export default {
     usdtContract({ walletObj }) {
       const web3 = walletObj.web3
       console.log(walletObj)
-      return web3 ? new web3.eth.Contract(USDT_ABI, USDT_CONTRACT_ADDRESS) : null
+      return web3
+        ? new web3.eth.Contract(USDT_ABI, USDT_CONTRACT_ADDRESS)
+        : null
     },
     nftContract({ walletObj }) {
       const web3 = walletObj.web3
