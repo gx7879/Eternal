@@ -1,5 +1,5 @@
 <template>
-  <div class="text-white">
+  <div class="text-white px-5">
     <div v-if="fetching">
       <!-- <button
         class="border-2 border-blue-300 rounded px-3 py-1"
@@ -23,13 +23,13 @@
         Disconnect
       </button>
     </div>
-    <button
+    <!-- <button
       v-else
       class="border-2 border-blue-300 rounded px-3 py-1"
       @click="onConnect"
     >
       Connected
-    </button>
+    </button> -->
     <template v-if="walletObj.web3">
       <button
         class="border-2 border-gray-300 rounded px-3 py-1"
@@ -62,11 +62,30 @@
         basicMint
       </button>
     </template>
-    <div
-      class="flex bg-[url(~/assets/images/titlebox_bg_phone.png)] bg-cover px-16 py-3"
-    >
-      NFT簡介
-    </div>
+    <!-- class="flex bg-[url(~/assets/images/titlebox_bg_phone.png)] bg-cover px-16 py-3" -->
+    <Title class="mb-5 mx-auto pt-6">NFT簡介</Title>
+    <p class="text-center">
+      2022/12/20 奢華質感的靈骨塔生命園區 - 喜悅帝寶正式完工。
+      持有永續傳承NFT者，可立即使用賦能，兌換成折價券，享有全市場最優惠簽約價！
+      購買喜悅帝寶，將持有土地權狀與建物權狀。
+    </p>
+    <Separator class="my-8"></Separator>
+    <Title class="mb-5 mx-auto">發行計畫</Title>
+    <p class="text-center">
+      <span class="text-lg">販售時間</span>
+      <br />
+      <span class="block text-4xl mb-4">2022.10.20 9:00pm</span>
+      永續傳承 NFT 黃金版 100件<br />每件 $900 USDT
+      <Separator
+        class="w-16 border-lightblue mt-[30px] mb-6 mx-auto"
+      ></Separator>
+      永續傳承 NFT 標準版 100件<br />每件$750 USDT
+      <span class="block text-titlered text-2xl mt-[30px] mb-3">
+        首波賦能兌換期
+      </span>
+      喜悅帝寶靈骨塔優惠專案<br />2022.10.20 9:00am 至<br />2023.01.31 9:00am
+    </p>
+    <Separator class="my-8"></Separator>
   </div>
 </template>
 

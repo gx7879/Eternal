@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col items-center bg-[url(~/assets/images/bg_phone.png)] bg-cover text-white text-[22px] text-center pt-[60px]"
+    class="flex flex-col items-center bg-[url(~/assets/images/bg_phone.png)] bg-cover text-white text-[22px] text-center mb-[23px] pt-[60px]"
   >
     <button
       type="button"
@@ -10,7 +10,7 @@
       <img class="ml-[7px]" src="~/assets/images/ic_wallet.png" alt="" />
     </button>
     <img src="~/assets/images/vision_phone.png" alt="" />
-    <h1>ETERNAL NFT<br />▪ 永世住宅▪全球首發 ▪</h1>
+    <h1 class="-mb-[23px]">ETERNAL NFT<br />▪ 永世住宅▪全球首發 ▪</h1>
   </div>
 </template>
 
