@@ -1,5 +1,5 @@
 <template>
-  <div class="border-t border-primarygray"></div>
+  <span class="block border-t border-primarygray"></span>
 </template>
 
 <script>

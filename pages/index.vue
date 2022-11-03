@@ -86,6 +86,89 @@
       喜悅帝寶靈骨塔優惠專案<br />2022.10.20 9:00am 至<br />2023.01.31 9:00am
     </p>
     <Separator class="my-8"></Separator>
+    <div class="px-1">
+      <div
+        class="text-center bg-secondaryblack border border-primarygray mb-9 px-8 pt-6 pb-10"
+      >
+        <Title class="mb-5 mx-auto">賦能介紹</Title>
+        <p class="mb-6">
+          超強賦能，永世服務！<br />首波賦能：喜悅帝寶靈骨塔優惠折抵
+        </p>
+        <div class="md:flex md:gap-x-40">
+          <div>
+            <div class="bg-[#888] w-full pb-[100%] mb-3"></div>
+            <p class="text-xl">
+              ▪標準版▪<br /><br />持標準版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
+              NT $22,500 盡享獨家優惠
+            </p>
+            <button
+              type="button"
+              class="border border-lightblue text-lightblue rounded-full mt-5 mb-8 px-[66px] py-3"
+            >
+              ＋ 看更多
+            </button>
+          </div>
+          <div>
+            <div class="bg-[#888] w-full pb-[100%] mb-3"></div>
+            <p class="text-xl">
+              ▪黃金版▪<br /><br />持黃金版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
+              NT $27,000 享獨家優惠與代祭拜服務
+            </p>
+            <button
+              type="button"
+              class="border border-lightblue text-lightblue rounded-full mt-5 px-[66px] py-3"
+            >
+              ＋ 看更多
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex -mx-5 mb-8 px-[13px] bg-lightblue text-secondaryblack text-2xl overflow-x-hidden"
+    >
+      <div
+        v-for="i of 2"
+        :key="i"
+        class="flex flex-none flex-row pt-3.5 pb-2.5 animate-scroll"
+      >
+        永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸
+        永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸
+        永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸
+        永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸
+        永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承
+      </div>
+    </div>
+    <Title class="mb-6 mx-auto">RoadMap</Title>
+    <div class="flex flex-col items-center text-center">
+      <span class="border border-primarygray h-12 mb-3"></span>
+      <p class="mb-4">
+        <span class="block text-2xl text-titlered font-black mb-2">
+          2022.10.20 - 2023.1.31
+        </span>
+        永世傳承NFT開始發行, 首次賦能優惠兌換期
+      </p>
+      <span class="border border-primarygray h-12 mb-3"></span>
+      <p class="mb-4">
+        <span class="block text-2xl text-titlered font-black mb-2">2023.3</span>
+        新服務與賦能上線<br />首波NFT持有者直接成為VIP創始會員
+      </p>
+      <span class="border border-primarygray h-12 mb-3"></span>
+      <p class="mb-4">
+        <span class="block text-2xl text-titlered font-black mb-2">2024.4</span>
+        永世鏈服務升級，所有NFT持有者將享有<br />【家族時空罐】服務，將先人影音資料上傳永世保存，或購買者預錄影音並指定開啟日期等服務
+      </p>
+      <span class="border border-primarygray h-12 mb-3"></span>
+      <p class="mb-4">
+        <span class="block text-2xl text-titlered font-black mb-2"
+          >2024.12
+        </span>
+        永世鏈服務升級，VIP創始會員將享有<br />【家族元宇宙】之虛擬土地與數位家族祠堂。2025年3月
+        永世鏈升級，VIP創始會員將享有【擬真VR人物】服務未來永世鏈將持續服務
+      </p>
+    </div>
+    <Separator class="mt-9 mb-10"></Separator>
+    <Title class="mb-6 mx-auto">Q&A</Title>
   </div>
 </template>
 

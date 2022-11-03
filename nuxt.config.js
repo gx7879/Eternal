@@ -6,7 +6,7 @@ export default {
       lang: 'en',
     },
     bodyAttrs: {
-      class: 'bg-[#121117]'
+      class: 'bg-[#121117]',
     },
     meta: [
       { charset: 'utf-8' },
@@ -31,6 +31,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     '@nuxt/postcss8',
+    '@nuxtjs/google-fonts',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -52,6 +53,11 @@ export default {
         tailwindcss: {},
         autoprefixer: {},
       },
+    },
+  },
+  googleFonts: {
+    families: {
+      'Noto+Sans+TC': [100, 300, 400, 500, 700, 900],
     },
   },
 }

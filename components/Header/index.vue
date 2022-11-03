@@ -1,6 +1,7 @@
 <template>
   <div
-    class="flex flex-col items-center bg-[url(~/assets/images/bg_phone.png)] bg-cover text-white text-[22px] text-center mb-[23px] pt-[60px]"
+    class="flex flex-col items-center bg-cover text-white text-[22px] text-center mb-[23px] pt-[60px]"
+    :class="bg"
   >
     <button
       type="button"
@@ -9,14 +10,30 @@
       連接錢包
       <img class="ml-[7px]" src="~/assets/images/ic_wallet.png" alt="" />
     </button>
-    <img src="~/assets/images/vision_phone.png" alt="" />
-    <h1 class="-mb-[23px]">ETERNAL NFT<br />▪ 永世住宅▪全球首發 ▪</h1>
+    <template v-if="$route.name === 'index'">
+      <img src="~/assets/images/vision_phone.png" alt="" />
+    </template>
+    <template v-else>
+      <img src="~/assets/images/ic_logo_phone.png" alt="" />
+    </template>
+    <h1 v-if="$route.name === 'index'" class="-mb-[23px]">
+      ETERNAL NFT<br />▪ 永世住宅▪全球首發 ▪
+    </h1>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Header',
+  computed: {
+    bg() {
+      if (this.$route.name === 'index') {
+        return ['bg-[url(~/assets/images/bg_phone.png)]']
+      } else {
+        return []
+      }
+    },
+  },
 }
 </script>
 
