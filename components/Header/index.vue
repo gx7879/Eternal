@@ -1,11 +1,12 @@
 <template>
   <div
-    class="flex flex-col items-center bg-cover text-white text-[22px] text-center mb-[23px] pt-[60px]"
+    class="flex flex-col items-center bg-cover text-white text-[22px] text-center mb-6 pt-[60px]"
     :class="bg"
   >
     <button
       type="button"
-      class="flex items-center bg-secondaryblack text-lightblue border border-lightblue rounded-full px-[22px] mb-2.5 py-[13px]"
+      class="flex items-center bg-secondaryblack text-lightblue border border-lightblue rounded-full px-[22px] py-[13px]"
+      :class="{'mb-2.5': $route.name === 'index','mb-6': $route.name !== 'index'}"
     >
       連接錢包
       <img class="ml-[7px]" src="~/assets/images/ic_wallet.png" alt="" />
