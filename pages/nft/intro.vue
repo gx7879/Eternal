@@ -1,10 +1,10 @@
 <template>
-  <div class="px-5">
+  <div class="px-5 text-white text-center">
     <div class="mb-12 md:flex md:gap-x-[90px]">
       <div class="mx-auto mb-5 max-w-[278px]">
         <div class="w-full rounded-md bg-[#888] pb-[100%]"></div>
       </div>
-      <div class="text-center text-white">
+      <div class="text-center">
         <h2 class="mb-3 text-2xl text-gold">黃金版NFT</h2>
         <span class="text-lg text-primarygray">可購買, 剩餘100個</span>
         <div class="text-[40px]">900 USDT</div>
@@ -45,7 +45,89 @@
         </button>
       </div>
     </div>
-    <h3 class="text-xl text-lightblue">首波四大賦能說明</h3>
+    <h3 class="mb-2.5 text-center text-xl text-lightblue">首波四大賦能說明</h3>
+    <p>
+      1. 持黃金版NFT，購買喜悅帝寶靈骨塔位，總金額可折抵NT $27,000<br />2.
+      代為祭拜：持黃金版NFT並完成簽約，立即享有三年期的誦經法會暨拜飯服務與初一、十五、八大節日、忌日、冥誕代為祭祀。<br />3.
+      三年期清明節專車接送服務，讓您更便利的緬懷先人（定點制，如台北車站至喜悅帝寶園區來回接送）<br />4.
+      永世傳承NFT持有者，未來將可直接升級為本NFT的VIP
+    </p>
+    <Separator class="mt-6 mb-8"></Separator>
+    <Title class="mx-auto mb-6">關於喜悅帝寶</Title>
+    <p class="mb-6 text-center">
+      了解到大部分的業者不是真心為了服務每個人的最後一哩路，而是不斷的想透過法規的漏洞來詐取消費者。了解到事態日趨嚴重的我們，秉持著『永續經營、從一而終』的理念，延請三位老師根據這理想，設計出了｢喜悅帝寶｣這項產品。
+      ｢喜悅帝寶｣有別於其他市面上的產品從土地、建物、產權、合約、維護、服務六項指標提供完整保障，讓先人們能永永久久的安居於此。所以我們將這擁有完整保障的產品命名為永久住宅。為了普及永久住宅，我們規劃出了鳳凰藝術園區這是實現我們理念的第一步也是未來我們與賓客們共生共榮的永恆居所。
+    </p>
+    <div class="-mx-5 mb-8">
+      <iframe
+        class="aspect-video w-full"
+        src="https://www.youtube.com/embed/12V8Ik4xmV4"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="mb-8 px-1">
+      <div class="border border-primarygray pt-6 pb-12 text-center">
+        <Title class="mx-auto mb-5">永世價值</Title>
+        <p class="mb-8">擁有土地與建物所有權狀</p>
+        <div class="mb-6 w-full overflow-x-auto">
+          <img class="max-w-none" src="~/assets/images/table_1.png" alt="" />
+        </div>
+        <div class="grid grid-cols-2 gap-x-12 gap-y-8 px-12">
+          <div class="flex flex-col">
+            <img src="~/assets/images/img_phone_1.png" alt="" />
+            <span>重建委員會</span>
+          </div>
+          <div class="flex flex-col">
+            <img src="~/assets/images/img_phone_2.png" alt="" />
+            <span>建物所有權狀</span>
+          </div>
+          <div class="flex flex-col">
+            <img src="~/assets/images/img_phone_3.png" alt="" />
+            <span>土地所有權狀</span>
+          </div>
+          <div class="flex flex-col">
+            <img src="~/assets/images/img_phone_4.png" alt="" />
+            <span>永久使用權狀</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-8 px-1">
+      <div class="border border-primarygray pt-6 pb-8 text-center">
+        <Title class="mx-auto mb-5">公辦民營/永世保障</Title>
+        <p class="mb-8">擁有土地與建物所有權狀</p>
+        <div class="w-full overflow-x-auto">
+          <img class="max-w-none" src="~/assets/images/table_2.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="mb-14 px-1">
+      <div class="border border-primarygray pt-6 pb-9 text-center">
+        <Title class="mx-auto mb-5">信託基金重建</Title>
+        <p class="mb-8 px-8 text-lg">
+          喜悅帝寶園區僅有2500戶，每戶費用將撥出2萬元成立【永久重建基金】，以基金複利支付未來修建資金，後人將不再負擔重建費用。重建基金定存年息0.8%計算表如下：
+        </p>
+        <div class="mb-[35px] w-full overflow-x-auto">
+          <img class="max-w-none" src="~/assets/images/table_3.png" alt="" />
+        </div>
+        <p class="px-8 text-left text-primarygray">
+          重建及裝修費用試算<br />
+          100年 4725萬 （198坪*20萬/1坪,加計25%=4725萬）<br />
+          200年 5906萬 （4725萬加計25%=5906萬）<br />
+          300年 7382萬 （5906萬加計25%=7382萬）<br />
+          建物面積共189坪*重建及裝修成本每坪20萬(通貨膨脹另加計25%)
+        </p>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="rounded-full border border-lightblue px-20 py-3 text-lightblue mb-[93px]"
+    >
+      前往賦能兌換頁
+    </button>
   </div>
 </template>
 
