@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div class="flex items-center border border-lightblue mx-auto px-16 py-3">
+    <div class="mx-auto flex items-center border border-lightblue px-16 py-3">
       <picture class="mr-2">
         <source
           srcset="~/assets/images/ic_dec_blue_web.png"

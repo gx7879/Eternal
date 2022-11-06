@@ -1,5 +1,5 @@
 <template>
-  <div class="text-white text-center mb-6">
+  <div class="mb-6 text-center text-white">
     <img
       class="mx-auto mb-6"
       src="~/assets/images/ic_logo_chillnow.png"
