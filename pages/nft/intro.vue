@@ -1,5 +1,5 @@
 <template>
-  <div class="px-5 text-white text-center">
+  <div class="px-5 text-center text-white">
     <div class="mb-12 md:flex md:gap-x-[90px]">
       <div class="mx-auto mb-5 max-w-[278px]">
         <div class="w-full rounded-md bg-[#888] pb-[100%]"></div>
@@ -8,10 +8,10 @@
         <h2 class="mb-3 text-2xl text-gold">黃金版NFT</h2>
         <span class="text-lg text-primarygray">可購買, 剩餘100個</span>
         <div class="text-[40px]">900 USDT</div>
-        <span class="mb-5 block text-primarygray"
-          >冷錢包專屬方案：NT $32,000 ( Visa、Master )
-          購買NFT之後，請撥打080-080-3344 聯繫 參觀、服務；簽約優惠諮詢</span
-        >
+        <span class="mb-5 block text-primarygray">
+          冷錢包專屬方案：NT $32,000 ( Visa、Master )
+          購買NFT之後，請撥打080-080-3344 聯繫 參觀、服務；簽約優惠諮詢
+        </span>
         <div class="mx-auto mb-9 flex max-w-[240px] flex-col">
           <label for="count" class="mb-[3px] text-left text-primarygray"
             >數量</label
@@ -124,7 +124,7 @@
     </div>
     <button
       type="button"
-      class="rounded-full border border-lightblue px-20 py-3 text-lightblue mb-[93px]"
+      class="mb-[93px] rounded-full border border-lightblue px-20 py-3 text-lightblue"
     >
       前往賦能兌換頁
     </button>

@@ -3,6 +3,16 @@
     "source.fixAll.eslint": true
   },
   "eslint.validate": [
-    "javascript"
+    "javascript",
+    "javascriptreact",
+    "typescript"
+  ],
+  "stylelint.validate": [
+    "css",
+    "less",
+    "postcss",
+    "scss",
+    "vue",
+    "sass"
   ]
 }

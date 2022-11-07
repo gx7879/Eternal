@@ -15,8 +15,9 @@ module.exports = {
         lightblue: '#00FFFF',
         secondaryblack: '#17161F',
         primarygray: '#92929E',
+        modalgray: '#222128',
         titlered: '#EB5757',
-        gold: '#FFD600'
+        gold: '#FFD600',
       },
       animation: {
         scroll: 'scroll 25s linear 0s infinite',
