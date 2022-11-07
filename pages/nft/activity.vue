@@ -25,12 +25,13 @@
         <button
           type="button"
           class="rounded-full border border-lightblue px-[18px] py-2 text-lightblue"
+          @click="openModal"
         >
           Redeem
         </button>
       </div>
     </div>
-    <Modal></Modal>
+    <Modal :show.sync="show"></Modal>
   </div>
 </template>
 
@@ -39,6 +40,7 @@ export default {
   data() {
     return {
       count: 0,
+      show: false,
     }
   },
   methods: {
@@ -52,6 +54,9 @@ export default {
       let value = Number(this.count)
       value++
       this.count = value
+    },
+    openModal() {
+      this.show = true
     },
   },
 }
