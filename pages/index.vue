@@ -1,5 +1,5 @@
 <template>
-  <div class="px-5 text-white">
+  <div class="px-5 text-white md:-mt-[72px]">
     <div v-if="fetching">
       <!-- <button
         class="border-2 border-blue-300 rounded px-3 py-1"
@@ -63,63 +63,86 @@
       </button>
     </template>
     <!-- class="flex bg-[url(~/assets/images/titlebox_bg_phone.png)] bg-cover px-16 py-3" -->
-    <Title class="mx-auto mb-5 pt-6">NFT簡介</Title>
-    <p class="text-center">
+    <Title class="mx-auto mb-5 pt-6 md:mb-8 md:pt-0">NFT簡介</Title>
+    <p class="text-center md:text-lg">
       2022/12/20 奢華質感的靈骨塔生命園區 - 喜悅帝寶正式完工。
+      <span class="md:block"></span>
       持有永續傳承NFT者，可立即使用賦能，兌換成折價券，享有全市場最優惠簽約價！
+      <span class="md:block"></span>
       購買喜悅帝寶，將持有土地權狀與建物權狀。
     </p>
-    <Separator class="my-8"></Separator>
-    <Title class="mx-auto mb-5">發行計畫</Title>
-    <p class="text-center">
-      <span class="text-lg">販售時間</span>
-      <br />
-      <span class="mb-4 block text-4xl">2022.10.20 9:00pm</span>
-      永續傳承 NFT 黃金版 100件<br />每件 $900 USDT
-      <Separator
-        class="mx-auto mt-[30px] mb-6 w-16 border-lightblue"
-      ></Separator>
-      永續傳承 NFT 標準版 100件<br />每件$750 USDT
-      <span class="mt-[30px] mb-3 block text-2xl text-titlered">
+    <Separator class="my-8 md:mt-[67px] md:mb-16"></Separator>
+    <Title class="mx-auto mb-5 md:mb-6">發行計畫</Title>
+    <div class="text-center">
+      <div
+        class="flex flex-col md:mb-6 md:flex-row md:items-end md:justify-center"
+      >
+        <span class="text-lg md:mr-5 md:text-2xl">販售時間</span>
+        <span class="mb-4 block text-4xl md:mb-0 md:text-7xl">
+          2022.10.20 9:00pm
+        </span>
+      </div>
+      <div
+        class="md:mb-10 md:flex md:items-center md:justify-center md:text-2xl"
+      >
+        永續傳承 NFT 黃金版 100件<br />每件 $900 USDT
+        <Separator
+          class="mx-auto mt-[30px] mb-6 w-16 border-lightblue md:mx-12 md:mt-0 md:mb-0 md:w-0 md:self-stretch md:border-r"
+        ></Separator>
+        永續傳承 NFT 標準版 100件<br />每件$750 USDT
+      </div>
+      <span
+        class="mt-[30px] mb-3 block text-2xl text-titlered md:mb-5 md:text-4xl"
+      >
         首波賦能兌換期
       </span>
-      喜悅帝寶靈骨塔優惠專案<br />2022.10.20 9:00am 至<br />2023.01.31 9:00am
-    </p>
-    <Separator class="my-8"></Separator>
+      <span class="md:mb-16 md:block md:text-2xl">
+        喜悅帝寶靈骨塔優惠專案<span class="block md:hidden"></span> 2022.10.20
+        9:00am 至<span class="block md:hidden"></span>
+        2023.01.31 9:00am
+      </span>
+    </div>
+    <Separator class="my-8 md:hidden"></Separator>
     <div class="px-1">
       <div
         class="mb-9 border border-primarygray bg-secondaryblack px-8 pt-6 pb-10 text-center"
       >
-        <Title class="mx-auto mb-5">賦能介紹</Title>
-        <p class="mb-6">
+        <Title class="mx-auto mb-5 md:mb-8">賦能介紹</Title>
+        <p class="mb-6 md:mb-[70px] md:text-lg">
           超強賦能，永世服務！<br />首波賦能：喜悅帝寶靈骨塔優惠折抵
         </p>
-        <div class="md:flex md:gap-x-40">
-          <div>
-            <div class="mb-3 w-full bg-[#888] pb-[100%]"></div>
-            <p class="text-xl">
-              ▪標準版▪<br /><br />持標準版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
-              NT $22,500 盡享獨家優惠
-            </p>
-            <button
-              type="button"
-              class="mt-5 mb-8 rounded-full border border-lightblue px-[66px] py-3 text-lightblue"
-            >
-              ＋ 看更多
-            </button>
-          </div>
-          <div>
-            <div class="mb-3 w-full bg-[#888] pb-[100%]"></div>
-            <p class="text-xl">
-              ▪黃金版▪<br /><br />持黃金版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
-              NT $27,000 享獨家優惠與代祭拜服務
-            </p>
-            <button
-              type="button"
-              class="mt-5 rounded-full border border-lightblue px-[66px] py-3 text-lightblue"
-            >
-              ＋ 看更多
-            </button>
+        <div class="md:overflow-x-auto">
+          <div class="md:flex md:gap-x-40">
+            <div>
+              <div
+                class="mb-3 w-full bg-[#888] pb-[100%] md:mb-6 md:w-[360px]"
+              ></div>
+              <p class="text-xl">
+                ▪標準版▪<br /><br />持標準版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
+                NT $22,500 盡享獨家優惠
+              </p>
+              <button
+                type="button"
+                class="mt-5 mb-8 rounded-full border border-lightblue px-[66px] py-3 text-lightblue"
+              >
+                ＋ 看更多
+              </button>
+            </div>
+            <div>
+              <div
+                class="mb-3 w-full bg-[#888] pb-[100%] md:mb-6 md:w-[360px]"
+              ></div>
+              <p class="text-xl">
+                ▪黃金版▪<br /><br />持黃金版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
+                NT $27,000 享獨家優惠與代祭拜服務
+              </p>
+              <button
+                type="button"
+                class="mt-5 rounded-full border border-lightblue px-[66px] py-3 text-lightblue"
+              >
+                ＋ 看更多
+              </button>
+            </div>
           </div>
         </div>
       </div>

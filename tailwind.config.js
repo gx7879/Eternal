@@ -11,6 +11,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        md: '780px',
+      },
       colors: {
         lightblue: '#00FFFF',
         secondaryblack: '#17161F',

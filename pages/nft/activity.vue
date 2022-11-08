@@ -31,7 +31,20 @@
         </button>
       </div>
     </div>
-    <Modal :show.sync="show"></Modal>
+    <Modal :show.sync="show">
+      <h3 class="mb-[43px] text-2xl">NFT賦能兌換</h3>
+      <client-only placeholder="loading...">
+        <vue-qr text="123" :size="288"></vue-qr>
+      </client-only>
+    </Modal>
+    <Modal :show.sync="status">
+      <img
+        class="mx-auto mb-7"
+        src="~/assets/images/ic_pop_success.png"
+        alt=""
+      />
+      <p class="text-2xl">賦能已兌換完成</p>
+    </Modal>
   </div>
 </template>
 
@@ -41,6 +54,7 @@ export default {
     return {
       count: 0,
       show: false,
+      status: false,
     }
   },
   methods: {
