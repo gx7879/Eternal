@@ -105,7 +105,7 @@
     <Separator class="my-8 md:hidden"></Separator>
     <div class="px-1">
       <div
-        class="mb-9 border border-primarygray bg-secondaryblack px-8 pt-6 pb-10 text-center"
+        class="mb-9 border border-primarygray bg-secondaryblack px-8 pt-6 pb-10 text-center md:mb-[72px] md:pt-12 md:pb-16"
       >
         <Title class="mx-auto mb-5 md:mb-8">賦能介紹</Title>
         <p class="mb-6 md:mb-[70px] md:text-lg">
@@ -113,32 +113,38 @@
         </p>
         <div class="md:overflow-x-auto">
           <div class="md:flex md:gap-x-40">
-            <div>
+            <div class="flex flex-col items-center">
               <div
                 class="mb-3 w-full bg-[#888] pb-[100%] md:mb-6 md:w-[360px]"
               ></div>
-              <p class="text-xl">
-                ▪標準版▪<br /><br />持標準版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
+              <p class="flex-1 text-xl">
+                <span class="mb-3.5 block md:mb-4 md:text-[28px]">
+                  ▪標準版▪
+                </span>
+                持標準版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
                 NT $22,500 盡享獨家優惠
               </p>
               <button
                 type="button"
-                class="mt-5 mb-8 rounded-full border border-lightblue px-[66px] py-3 text-lightblue"
+                class="mt-5 mb-8 rounded-full border border-lightblue px-[66px] py-3 text-lightblue md:mt-10 md:mb-0 md:px-[60px] md:py-3.5 md:text-xl"
               >
                 ＋ 看更多
               </button>
             </div>
-            <div>
+            <div class="flex flex-col items-center">
               <div
                 class="mb-3 w-full bg-[#888] pb-[100%] md:mb-6 md:w-[360px]"
               ></div>
-              <p class="text-xl">
-                ▪黃金版▪<br /><br />持黃金版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
+              <p class="flex-1 text-xl">
+                <span class="mb-3.5 block md:mb-4 md:text-[28px]">
+                  ▪黃金版▪
+                </span>
+                持黃金版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
                 NT $27,000 享獨家優惠與代祭拜服務
               </p>
               <button
                 type="button"
-                class="mt-5 rounded-full border border-lightblue px-[66px] py-3 text-lightblue"
+                class="mt-5 rounded-full border border-lightblue px-[66px] py-3 text-lightblue md:mt-10 md:px-[60px] md:py-3.5 md:text-xl"
               >
                 ＋ 看更多
               </button>
@@ -148,12 +154,12 @@
       </div>
     </div>
     <div
-      class="-mx-5 mb-8 flex overflow-x-hidden bg-lightblue px-[13px] text-2xl text-secondaryblack"
+      class="-mx-5 mb-8 flex overflow-x-hidden bg-lightblue px-[13px] text-2xl text-secondaryblack md:mb-14"
     >
       <div
         v-for="i of 2"
         :key="i"
-        class="flex flex-none animate-scroll flex-row pt-3.5 pb-2.5"
+        class="flex flex-none animate-scroll flex-row pt-3.5 pb-2.5 md:py-3.5"
       >
         永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸
         永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸
@@ -162,35 +168,47 @@
         永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承
       </div>
     </div>
-    <Title class="mx-auto mb-6">RoadMap</Title>
-    <div class="flex flex-col items-center text-center">
-      <span class="mb-3 h-12 border border-primarygray"></span>
+    <Title class="mx-auto mb-6 md:mb-10">RoadMap</Title>
+    <div class="flex flex-col items-center text-center md:text-xl">
+      <span class="mb-3 h-12 border border-primarygray md:mb-6 md:h-16"></span>
       <p class="mb-4">
-        <span class="mb-2 block text-2xl font-black text-titlered">
+        <span
+          class="mb-2 block text-2xl font-black text-titlered md:text-[32px]"
+        >
           2022.10.20 - 2023.1.31
         </span>
         永世傳承NFT開始發行, 首次賦能優惠兌換期
       </p>
-      <span class="mb-3 h-12 border border-primarygray"></span>
+      <span class="mb-3 h-12 border border-primarygray md:mb-6 md:h-16"></span>
       <p class="mb-4">
-        <span class="mb-2 block text-2xl font-black text-titlered">2023.3</span>
+        <span
+          class="mb-2 block text-2xl font-black text-titlered md:text-[32px]"
+        >
+          2023.3
+        </span>
         新服務與賦能上線<br />首波NFT持有者直接成為VIP創始會員
       </p>
-      <span class="mb-3 h-12 border border-primarygray"></span>
+      <span class="mb-3 h-12 border border-primarygray md:mb-6 md:h-16"></span>
       <p class="mb-4">
-        <span class="mb-2 block text-2xl font-black text-titlered">2024.4</span>
+        <span
+          class="mb-2 block text-2xl font-black text-titlered md:text-[32px]"
+        >
+          2024.4
+        </span>
         永世鏈服務升級，所有NFT持有者將享有<br />【家族時空罐】服務，將先人影音資料上傳永世保存，或購買者預錄影音並指定開啟日期等服務
       </p>
-      <span class="mb-3 h-12 border border-primarygray"></span>
+      <span class="mb-3 h-12 border border-primarygray md:mb-6 md:h-16"></span>
       <p class="mb-4">
-        <span class="mb-2 block text-2xl font-black text-titlered"
-          >2024.12
+        <span
+          class="mb-2 block text-2xl font-black text-titlered md:text-[32px]"
+        >
+          2024.12
         </span>
         永世鏈服務升級，VIP創始會員將享有<br />【家族元宇宙】之虛擬土地與數位家族祠堂。2025年3月
         永世鏈升級，VIP創始會員將享有【擬真VR人物】服務未來永世鏈將持續服務
       </p>
     </div>
-    <Separator class="mt-9 mb-10"></Separator>
+    <Separator class="mt-9 mb-10 md:mt-[76px] md:mb-16"></Separator>
     <Title class="mx-auto mb-6">Q&A</Title>
   </div>
 </template>
