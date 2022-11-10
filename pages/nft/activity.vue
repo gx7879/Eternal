@@ -21,7 +21,7 @@
 
     <Separator class="mt-6 mb-8 md:mt-16 md:mb-14"></Separator>
     <Title class="mb-8 md:mb-16">NFT</Title>
-    <div class="mb-[100px] grid grid-cols-2 gap-8 px-[11px]">
+    <div class="mb-[100px] grid grid-cols-2 gap-8 px-[11px] lg:grid-cols-3">
       <div v-for="i of 4" :key="i">
         <div class="mb-6 w-full rounded-md bg-[#888] pb-[100%] md:mb-8"></div>
         <button

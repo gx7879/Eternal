@@ -8,7 +8,7 @@
       class="flex items-center rounded-full border border-lightblue bg-secondaryblack px-[22px] py-[13px] text-lightblue"
       :class="{
         'mb-2.5': $route.name === 'index',
-        'order-2 mb-6 md:mb-0': $route.name !== 'index',
+        'mb-6 md:order-2 md:mb-0': $route.name !== 'index',
       }"
     >
       連接錢包
