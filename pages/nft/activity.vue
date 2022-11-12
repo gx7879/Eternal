@@ -1,5 +1,5 @@
 <template>
-  <div class="px-5 text-center text-white">
+  <div class="px-5 text-center text-white md:mx-auto md:max-w-7xl">
     <div class="mb-12 md:flex md:gap-x-[90px]">
       <div class="mx-auto mb-5 max-w-[278px] md:w-full md:max-w-none md:flex-1">
         <div class="w-full rounded-md bg-[#888] pb-[100%]"></div>
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <Separator class="mt-6 mb-8 md:mt-16 md:mb-14"></Separator>
+    <Separator class="mt-6 mb-8 md:mt-16 md:mb-14 lg:-mx-5"></Separator>
     <Title class="mb-8 md:mb-16">NFT</Title>
     <div class="mb-[100px] grid grid-cols-2 gap-8 px-[11px] lg:grid-cols-3">
       <div v-for="i of 4" :key="i">
