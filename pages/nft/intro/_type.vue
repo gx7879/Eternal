@@ -2,12 +2,19 @@
   <div class="px-5 text-center text-white md:mx-auto md:max-w-7xl">
     <div class="mb-12 md:flex md:gap-x-[90px]">
       <div class="mx-auto mb-5 max-w-[278px] md:w-full md:max-w-none md:flex-1">
-        <div class="w-full rounded-md bg-[#888] pb-[100%]"></div>
+        <div
+          class="w-full rounded-md bg-[#888] bg-cover pb-[100%]"
+          :style="{
+            backgroundImage: `url(https://phoenix.un05.com/${bg})`,
+          }"
+        ></div>
       </div>
       <div class="text-center md:flex-1 md:text-left">
-        <h2 class="mb-3 text-2xl text-gold">黃金版NFT</h2>
+        <h2 class="mb-3 text-2xl text-gold">
+          {{ title }}
+        </h2>
         <span class="text-lg text-primarygray">可購買, 剩餘100個</span>
-        <div class="text-[40px]">900 USDT</div>
+        <div class="text-[40px]">{{ price }} USDT</div>
         <span class="mb-5 block text-primarygray">
           冷錢包專屬方案：NT $32,000 ( Visa、Master )
           購買NFT之後，請撥打080-080-3344 聯繫 參觀、服務；簽約優惠諮詢
@@ -165,22 +172,73 @@
           </p>
         </div>
       </div>
-      <button
-        type="button"
-        class="mb-[93px] rounded-full border border-lightblue px-20 py-3 text-lightblue"
+      <NuxtLink
+        to="/nft/activity"
+        class="mb-[93px] inline-block rounded-full border border-lightblue px-20 py-3 text-lightblue"
       >
         前往賦能兌換頁
-      </button>
+      </NuxtLink>
     </div>
   </div>
 </template>
-
+<!-- eslint-disable camelcase -->
 <script>
+import { mapGetters } from 'vuex'
 export default {
+  asyncData({ params }) {
+    const data = {
+      normal: {
+        title: '標準版NFT',
+        price: 750,
+      },
+      golden: {
+        title: '黃金版NFT',
+        price: 900,
+      },
+    }
+    return {
+      type: params.type,
+      ...data[params.type],
+    }
+  },
   data() {
     return {
       count: 0,
     }
+  },
+  head() {
+    const { meta_title, meta_keywords, meta_description, fb_og } = this.metaData
+    const keywords = JSON.parse(meta_keywords)
+      .map((item) => item.value)
+      .join(',')
+    return {
+      title: meta_title,
+      meta: [
+        { hid: 'description', name: 'description', content: meta_description },
+        { hid: 'keywords', name: 'keywords', content: keywords },
+        { hid: 'og:title', name: 'og:title', content: fb_og.og_title },
+        { hid: 'og:type', name: 'og:type', content: fb_og.og_type },
+        { hid: 'og:url', name: 'og:url', content: fb_og.og_url },
+        { hid: 'og:image', name: 'og:image', content: fb_og.og_image },
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          content: fb_og.og_description,
+        },
+        {
+          hid: 'og:site_name',
+          name: 'og:site_name',
+          content: fb_og.og_site_name,
+        },
+      ],
+    }
+  },
+  computed: {
+    ...mapGetters(['metaData', 'contractSetting']),
+    bg({ type, contractSetting }) {
+      // const type =
+      return contractSetting[`${type}_before_redeem_image_url`]
+    },
   },
   methods: {
     decrement() {

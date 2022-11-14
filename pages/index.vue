@@ -53,7 +53,10 @@
           <div class="md:flex md:gap-x-40">
             <div class="flex flex-col items-center">
               <div
-                class="mb-3 aspect-square w-full bg-[#888] md:mb-6 md:w-[360px]"
+                class="mb-3 aspect-square w-full bg-[#888] bg-cover md:mb-6 md:w-[360px]"
+                :style="{
+                  backgroundImage: `url(https://phoenix.un05.com/${contractSetting.normal_before_redeem_image_url})`,
+                }"
               ></div>
               <p class="flex-1 text-xl">
                 <span class="mb-3.5 block md:mb-4 md:text-[28px]">
@@ -62,16 +65,19 @@
                 持標準版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
                 NT $22,500 盡享獨家優惠
               </p>
-              <button
-                type="button"
+              <NuxtLink
+                :to="{ name: 'nft-intro-type', params: { type: 'normal' } }"
                 class="mt-5 mb-8 rounded-full border border-lightblue px-[66px] py-3 text-lightblue md:mt-10 md:mb-0 md:px-[60px] md:py-3.5 md:text-xl"
               >
                 ＋ 看更多
-              </button>
+              </NuxtLink>
             </div>
             <div class="flex flex-col items-center">
               <div
-                class="mb-3 aspect-square w-full bg-[#888] md:mb-6 md:w-[360px]"
+                class="mb-3 aspect-square w-full bg-[#888] bg-cover md:mb-6 md:w-[360px]"
+                :style="{
+                  backgroundImage: `url(https://phoenix.un05.com/${contractSetting.golden_before_redeem_image_url})`,
+                }"
               ></div>
               <p class="flex-1 text-xl">
                 <span class="mb-3.5 block md:mb-4 md:text-[28px]">
@@ -80,12 +86,12 @@
                 持黃金版NFT<br />首波賦能，持有者於喜悅帝寶購買靈骨塔位，可折抵
                 NT $27,000 享獨家優惠與代祭拜服務
               </p>
-              <button
-                type="button"
+              <NuxtLink
+                :to="{ name: 'nft-intro-type', params: { type: 'golden' } }"
                 class="mt-5 rounded-full border border-lightblue px-[66px] py-3 text-lightblue md:mt-10 md:px-[60px] md:py-3.5 md:text-xl"
               >
                 ＋ 看更多
-              </button>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -151,10 +157,41 @@
   </div>
 </template>
 
+<!-- eslint-disable camelcase -->
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'IndexPage',
-  computed: {},
+  head() {
+    const { meta_title, meta_keywords, meta_description, fb_og } = this.metaData
+    const keywords = JSON.parse(meta_keywords)
+      .map((item) => item.value)
+      .join(',')
+    return {
+      title: meta_title,
+      meta: [
+        { hid: 'description', name: 'description', content: meta_description },
+        { hid: 'keywords', name: 'keywords', content: keywords },
+        { hid: 'og:title', name: 'og:title', content: fb_og.og_title },
+        { hid: 'og:type', name: 'og:type', content: fb_og.og_type },
+        { hid: 'og:url', name: 'og:url', content: fb_og.og_url },
+        { hid: 'og:image', name: 'og:image', content: fb_og.og_image },
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          content: fb_og.og_description,
+        },
+        {
+          hid: 'og:site_name',
+          name: 'og:site_name',
+          content: fb_og.og_site_name,
+        },
+      ],
+    }
+  },
+  computed: {
+    ...mapGetters(['metaData', 'contractSetting']),
+  },
   methods: {},
 }
 </script>

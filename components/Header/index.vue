@@ -25,7 +25,9 @@
       </picture>
     </template>
     <template v-else>
-      <img src="~/assets/images/ic_logo_phone.png" alt="" />
+      <NuxtLink to="/">
+        <img src="~/assets/images/ic_logo_phone.png" alt="" />
+      </NuxtLink>
     </template>
     <h1
       v-if="$route.name === 'index'"
@@ -75,6 +77,7 @@ export default {
         ]
       }
     },
+
     web3({ $store }) {
       return $store.state.web3
     },
@@ -138,7 +141,7 @@ export default {
       if (!provider.on) {
         return
       }
-      provider.on('close', () => _this.disconnect())
+      // provider.on('close', () => _this.disconnect())
       provider.on('accountsChanged', async (accounts) => {
         // eslint-disable-next-line prefer-destructuring
         console.log('111', accounts)
