@@ -1,8 +1,11 @@
 import Index from '@/api'
 
-export default (context, inject) => {
+export default ({ $axios }, inject) => {
+  const request = $axios.create({
+    baseURL: 'http://phoenix.un05.com',
+  })
   const factories = {
-    index: Index(context.$axios),
+    index: Index(request),
   }
 
   inject('api', factories)

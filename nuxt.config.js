@@ -24,6 +24,7 @@ export default {
   plugins: [
     { src: '@/plugins/qr.js', ssr: false },
     { src: '@/plugins/api.js' },
+    { src: '@/plugins/redreamerApi.js' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,7 +47,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'http://phoenix.un05.com',
+    baseURL: '/',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -62,5 +63,11 @@ export default {
     families: {
       'Noto+Sans+TC': [100, 300, 400, 500, 700, 900],
     },
+  },
+  publicRuntimeConfig: {
+    redreamerApiUrl: 'https://passport-testnet.redreamer.io/',
+  },
+  privateRuntimeConfig: {
+    redreamerApiUrl: 'https://mainnet-api.redreamer.io',
   },
 }

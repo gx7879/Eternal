@@ -74,6 +74,10 @@ export default {
     openModal() {
       this.show = true
     },
+    async getNft() {
+      const { data } = await this.$redreamerApi.redreamer.campaigns()
+      console.log(data)
+    },
   },
 }
 </script>

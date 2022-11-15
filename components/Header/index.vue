@@ -135,6 +135,7 @@ export default {
       this.$store.commit('SETWEB3', Object.freeze(web3))
       this.$store.commit('SETFETCHING', true)
       await _this.getAccountAssets()
+      await _this.redeemLogin()
     },
     subscribeProvider(provider) {
       const _this = this
@@ -183,6 +184,33 @@ export default {
       return _this.web3.eth
         .getBalance(_this.walletObj.address)
         .then((res) => (res ? utils.fromWei(res.toString(), 'ether') : 0))
+    },
+    async redeemLogin() {
+      try {
+        const privateKey =
+          '895d32dbc192afdbb5db9b6da11873dc6e502453a2e0ce65a42e8520be7d22c7'
+        const address = this.walletObj.address
+        const {
+          data: { nonce },
+        } = await this.$redreamerApi.redreamer.nonce({
+          address,
+        })
+        console.log(nonce)
+        const signatureVal = this.web3.eth.accounts.sign(
+          address.toLowerCase() + ' ' + nonce,
+          privateKey
+        )
+        console.log(signatureVal)
+        const { data } = await this.$redreamerApi.redreamer.login({
+          address,
+          signature: signatureVal.signature,
+        })
+
+        console.log(data)
+        this.$store.commit('SETREDREAMERTOKEN', data.token)
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
 }

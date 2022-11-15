@@ -4,6 +4,7 @@ export const state = () => ({
   fetching: false,
   web3: null,
   allData: {},
+  token: null,
 })
 
 export const mutations = {
@@ -21,6 +22,9 @@ export const mutations = {
   },
   SETDATA(state, payload) {
     state.allData = payload
+  },
+  SETREDREAMERTOKEN(state, payload) {
+    state.token = payload
   },
 }
 
