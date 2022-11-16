@@ -1,8 +1,11 @@
 <template>
   <div class="px-5 text-center text-white md:mx-auto md:max-w-7xl">
-    <div class="mb-12 md:flex md:gap-x-[90px]">
+    <div class="mb-12 items-center md:flex md:gap-x-[90px]">
       <div class="mx-auto mb-5 max-w-[278px] md:w-full md:max-w-none md:flex-1">
-        <div class="w-full rounded-md bg-[#888] pb-[100%]"></div>
+        <div
+          class="w-full rounded-md bg-[#888] bg-cover pb-[100%]"
+          :style="{ backgroundImage: `url(https://phoenix.un05.com/${bg})` }"
+        ></div>
       </div>
       <div class="text-center md:flex-1 md:text-left">
         <h2 class="mb-3 px-9 text-[32px] md:mb-[35px] md:px-0 md:text-4xl">
@@ -22,8 +25,11 @@
     <Separator class="mt-6 mb-8 md:mt-16 md:mb-14 lg:-mx-5"></Separator>
     <Title class="mb-8 md:mb-16">NFT</Title>
     <div class="mb-[100px] grid grid-cols-2 gap-8 px-[11px] lg:grid-cols-3">
-      <div v-for="i of 4" :key="i">
-        <div class="mb-6 w-full rounded-md bg-[#888] pb-[100%] md:mb-8"></div>
+      <div v-for="item of activity" :key="item.id">
+        <div
+          class="mb-6 w-full rounded-md bg-[#888] bg-contain bg-center bg-no-repeat pb-[100%] md:mb-8"
+          :style="{ backgroundImage: `url(${item.image_url})` }"
+        ></div>
         <button
           type="button"
           class="rounded-full border border-lightblue px-[18px] py-2 text-lightblue md:px-[82px] md:py-3.5"
@@ -51,13 +57,46 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
+  async asyncData({ $redreamerApi, store, query }) {
+    let activity = []
+    if (store.state.token) {
+      const {
+        data: { data: list },
+      } = await $redreamerApi.redreamer.campaigns()
+      console.log(list)
+      activity = [...list]
+    }
+
+    return {
+      activity,
+      type: query.type,
+    }
+  },
   data() {
     return {
       count: 0,
       show: false,
       status: false,
+      activity: [],
     }
+  },
+  computed: {
+    ...mapGetters(['contractSetting']),
+    token({ $store }) {
+      return $store.state.token
+    },
+    bg({ type, contractSetting }) {
+      return contractSetting[`${type}_before_redeem_image_url`]
+    },
+  },
+  watch: {
+    token(val) {
+      if (val) {
+        this.getNft()
+      }
+    },
   },
   methods: {
     decrement() {
@@ -75,8 +114,11 @@ export default {
       this.show = true
     },
     async getNft() {
-      const { data } = await this.$redreamerApi.redreamer.campaigns()
-      console.log(data)
+      const {
+        data: { data: activity },
+      } = await this.$redreamerApi.redreamer.campaigns()
+      console.log(activity)
+      this.activity = activity
     },
   },
 }

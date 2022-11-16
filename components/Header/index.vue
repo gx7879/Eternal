@@ -106,36 +106,40 @@ export default {
   methods: {
     async onConnect() {
       const _this = this
-      const provider = await _this.web3Modal.connect()
+      try {
+        const provider = await _this.web3Modal.connect()
 
-      await _this.subscribeProvider(provider)
+        await _this.subscribeProvider(provider)
 
-      const web3 = new Web3(provider)
-      const accounts = await web3.eth.getAccounts()
+        const web3 = new Web3(provider)
+        const accounts = await web3.eth.getAccounts()
 
-      const address = accounts[0]
+        const address = accounts[0]
 
-      const networkId = await web3.eth.net.getId()
+        const networkId = await web3.eth.net.getId()
 
-      const chainId = await web3.eth.getChainId() // 坑逼 注意版本 chainId
+        const chainId = await web3.eth.getChainId() // 坑逼 注意版本 chainId
 
-      // this.walletObj.web3 = Object.freeze(web3)
-      // this.walletObj.provider = Object.freeze(provider)
-      // this.walletObj.connected = true
-      // this.walletObj.address = address
-      // this.walletObj.chainId = chainId
-      // this.walletObj.networkId = networkId
-      this.walletObj = {
-        connect: true,
-        address,
-        chainId,
-        networkId,
+        // this.walletObj.web3 = Object.freeze(web3)
+        // this.walletObj.provider = Object.freeze(provider)
+        // this.walletObj.connected = true
+        // this.walletObj.address = address
+        // this.walletObj.chainId = chainId
+        // this.walletObj.networkId = networkId
+        this.walletObj = {
+          connect: true,
+          address,
+          chainId,
+          networkId,
+        }
+        this.$store.commit('SETWALLET', this.walletObj)
+        this.$store.commit('SETWEB3', Object.freeze(web3))
+        this.$store.commit('SETFETCHING', true)
+        await _this.getAccountAssets()
+        await _this.redeemLogin()
+      } catch (error) {
+        console.log(error)
       }
-      this.$store.commit('SETWALLET', this.walletObj)
-      this.$store.commit('SETWEB3', Object.freeze(web3))
-      this.$store.commit('SETFETCHING', true)
-      await _this.getAccountAssets()
-      await _this.redeemLogin()
     },
     subscribeProvider(provider) {
       const _this = this

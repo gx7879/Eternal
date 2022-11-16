@@ -65,7 +65,7 @@ export default {
     },
   },
   publicRuntimeConfig: {
-    redreamerApiUrl: 'https://passport-testnet.redreamer.io/',
+    redreamerApiUrl: 'https://testnet-api.redreamer.io',
   },
   privateRuntimeConfig: {
     redreamerApiUrl: 'https://mainnet-api.redreamer.io',

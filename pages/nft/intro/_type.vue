@@ -47,12 +47,23 @@
             </button>
           </div>
         </div>
-        <button
-          type="button"
-          class="rounded-full border border-lightblue px-20 py-3 text-lightblue md:px-[98px] md:py-3.5 md:text-xl"
+        <div
+          class="mx-auto flex max-w-[200px] flex-col gap-2 md:max-w-none lg:flex-row"
         >
-          購 買
-        </button>
+          <button
+            type="button"
+            class="rounded-full border border-lightblue px-20 py-3 text-lightblue md:px-[98px] md:py-3.5 md:text-xl"
+            @click="mint"
+          >
+            購買
+          </button>
+          <button
+            type="button"
+            class="flex h-[50px] items-center justify-center rounded-full border border-lightblue text-lightblue md:h-[58px] md:w-60 md:text-xl"
+          >
+            法幣購買
+          </button>
+        </div>
       </div>
     </div>
     <h3 class="mb-2.5 text-center text-xl text-lightblue md:text-left">
@@ -173,7 +184,7 @@
         </div>
       </div>
       <NuxtLink
-        to="/nft/activity"
+        :to="{ path: '/nft/activity', query: { type } }"
         class="mb-[93px] inline-block rounded-full border border-lightblue px-20 py-3 text-lightblue"
       >
         前往賦能兌換頁
@@ -183,7 +194,9 @@
 </template>
 <!-- eslint-disable camelcase -->
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
+import { NFT_ABI } from '@/web3/abi'
+import { NFT_CONTRACT_ADDRESS } from '@/web3/config'
 export default {
   asyncData({ params }) {
     const data = {
@@ -234,10 +247,19 @@ export default {
     }
   },
   computed: {
+    ...mapState(['walletObj']),
     ...mapGetters(['metaData', 'contractSetting']),
     bg({ type, contractSetting }) {
       // const type =
       return contractSetting[`${type}_before_redeem_image_url`]
+    },
+    web3({ $store }) {
+      return $store.state.web3
+    },
+    nftContract({ web3 }) {
+      // const web3 = web3.web3
+      // console.log(web3)
+      return web3 ? new web3.eth.Contract(NFT_ABI, NFT_CONTRACT_ADDRESS) : null
     },
   },
   methods: {
@@ -251,6 +273,16 @@ export default {
       let value = Number(this.count)
       value++
       this.count = value
+    },
+    async nftApprove() {
+      const _this = this
+      const result = await this.nftContract.methods
+        .approve(NFT_CONTRACT_ADDRESS, 750000000)
+        .send({ from: _this.walletObj.address })
+      console.log(result)
+    },
+    async mint() {
+      await this.nftApprove()
     },
   },
 }

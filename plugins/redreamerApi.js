@@ -2,7 +2,7 @@ import Redreamer from '@/api/redreamer'
 
 export default ({ $axios, store, $config }, inject) => {
   const request = $axios.create({
-    headers: { 'X-API-Key': 'jbQkUPiI3qj_l822cffdHfNklJ0ueXhvORYUAzc92Oo=' },
+    headers: { 'X-API-Key': 'lxX8iZPOxPgMP8asNprTiN4U8cvx5aBjw2kEj8xEVQY=' },
     baseURL: $config.redreamerApiUrl,
   })
   const factories = {
