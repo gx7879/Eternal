@@ -195,8 +195,8 @@
 <!-- eslint-disable camelcase -->
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { NFT_ABI } from '@/web3/abi'
-import { NFT_CONTRACT_ADDRESS } from '@/web3/config'
+import { USDT_ABI, NFT_ABI } from '@/web3/abi'
+import { USDT_CONTRACT_ADDRESS, NFT_CONTRACT_ADDRESS } from '@/web3/config'
 export default {
   asyncData({ params }) {
     const data = {
@@ -256,6 +256,11 @@ export default {
     web3({ $store }) {
       return $store.state.web3
     },
+    usdtContract({ web3 }) {
+      return web3
+        ? new web3.eth.Contract(USDT_ABI, USDT_CONTRACT_ADDRESS)
+        : null
+    },
     nftContract({ web3 }) {
       // const web3 = web3.web3
       // console.log(web3)
@@ -274,15 +279,32 @@ export default {
       value++
       this.count = value
     },
+    async usdtApprove() {
+      const _this = this
+      const result = await this.usdtContract.methods
+        .approve(USDT_CONTRACT_ADDRESS, 900000000)
+        .send({ from: _this.walletObj.address })
+      console.log(result)
+    },
     async nftApprove() {
       const _this = this
       const result = await this.nftContract.methods
-        .approve(NFT_CONTRACT_ADDRESS, 750000000)
+        .approve(NFT_CONTRACT_ADDRESS, 900000000)
         .send({ from: _this.walletObj.address })
       console.log(result)
     },
     async mint() {
-      await this.nftApprove()
+      const _this = this
+      if (this.web3) {
+        // await this.usdtApprove()
+        const result = await this.nftContract.methods
+          .goldMint(1)
+          .send({ from: _this.walletObj.address })
+        console.log(result)
+        // await this.nftApprove()
+      } else {
+        console.log('wallet connect')
+      }
     },
   },
 }
