@@ -3,18 +3,29 @@
     class="mb-6 flex flex-col items-center bg-cover pt-[60px] text-center text-[22px] text-white md:mb-0"
     :class="bg"
   >
-    <button
-      type="button"
-      class="flex items-center rounded-full border border-lightblue bg-secondaryblack px-[22px] py-[13px] text-lightblue"
-      :class="{
-        'mb-2.5': $route.name === 'index',
-        'mb-6 md:order-2 md:mb-0': $route.name !== 'index',
-      }"
-      @click="onConnect"
-    >
-      連接錢包
-      <img class="ml-[7px]" src="~/assets/images/ic_wallet.png" alt="" />
-    </button>
+    <div :class="{ 'md:order-2': $route.name !== 'index' }">
+      <template v-if="!walletObj.connected">
+        <button
+          type="button"
+          class="flex items-center rounded-full border border-lightblue bg-secondaryblack px-[22px] py-[13px] text-lightblue"
+          :class="{
+            'mb-2.5': $route.name === 'index',
+            'mb-6 md:mb-0': $route.name !== 'index',
+          }"
+          @click="onConnect"
+        >
+          連接錢包
+          <img class="ml-[7px]" src="~/assets/images/ic_wallet.png" alt="" />
+        </button>
+      </template>
+      <template v-else>
+        <span class="cursor-pointer hover:underline" @click="disconnect">
+          Unbinding Wallet:
+          {{ walletObj.address.slice(0, 2) }}...
+          {{ walletObj.address.slice(-4) }}
+        </span>
+      </template>
+    </div>
     <template v-if="$route.name === 'index'">
       <picture>
         <source
@@ -127,7 +138,7 @@ export default {
         // this.walletObj.chainId = chainId
         // this.walletObj.networkId = networkId
         this.walletObj = {
-          connect: true,
+          connected: true,
           address,
           chainId,
           networkId,
@@ -174,7 +185,7 @@ export default {
       Object.keys(INITIAL_STATE).forEach((e) => {
         _this.walletObj[e] = INITIAL_STATE[e]
       })
-      this.$store.commit('SETWALLET', _this.walletObj)
+      this.$store.commit('SETWALLET', this.walletObj)
       this.$store.commit('SETFETCHING', false)
     },
     async getAccountAssets() {
