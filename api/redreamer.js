@@ -25,4 +25,11 @@ export default (axios) => ({
       url: '/api/v1/passport/eth/campaigns/aafeca06-8711-4701-b41d-309720b405b2/nfts',
     })
   },
+  redeem(data) {
+    return axios({
+      method: 'POST',
+      url: '/api/v1/passport/eth/campaigns/aafeca06-8711-4701-b41d-309720b405b2/redeem',
+      data,
+    })
+  },
 })

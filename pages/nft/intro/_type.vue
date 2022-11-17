@@ -50,6 +50,20 @@
         <div
           class="mx-auto flex max-w-[200px] flex-col gap-2 md:max-w-none lg:flex-row"
         >
+          <!-- <button
+            type="button"
+            class="rounded-full border border-lightblue px-20 py-3 text-lightblue md:px-[98px] md:py-3.5 md:text-xl"
+            @click="usdtApprove"
+          >
+            usdtApprove
+          </button> -->
+          <button
+            type="button"
+            class="rounded-full border border-lightblue px-20 py-3 text-lightblue md:px-[98px] md:py-3.5 md:text-xl"
+            @click="nftApprove"
+          >
+            nftApprove
+          </button>
           <button
             type="button"
             class="rounded-full border border-lightblue px-20 py-3 text-lightblue md:px-[98px] md:py-3.5 md:text-xl"
@@ -216,7 +230,7 @@ export default {
   },
   data() {
     return {
-      count: 0,
+      count: 1,
     }
   },
   head() {
@@ -279,13 +293,13 @@ export default {
       value++
       this.count = value
     },
-    async usdtApprove() {
-      const _this = this
-      const result = await this.usdtContract.methods
-        .approve(USDT_CONTRACT_ADDRESS, 900000000)
-        .send({ from: _this.walletObj.address })
-      console.log(result)
-    },
+    // async usdtApprove() {
+    //   const _this = this
+    //   const result = await this.usdtContract.methods
+    //     .approve(USDT_CONTRACT_ADDRESS, 900000000)
+    //     .send({ from: _this.walletObj.address })
+    //   console.log(result)
+    // },
     async nftApprove() {
       const _this = this
       const result = await this.nftContract.methods

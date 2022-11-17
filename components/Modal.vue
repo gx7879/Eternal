@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     closeModal() {
+      this.$emit('close')
       this.$emit('update:show', false)
     },
   },

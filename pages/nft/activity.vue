@@ -28,21 +28,21 @@
       <div v-for="item of activity" :key="item.id">
         <div
           class="mb-6 w-full rounded-md bg-[#888] bg-contain bg-center bg-no-repeat pb-[100%] md:mb-8"
-          :style="{ backgroundImage: `url(${item.image_url})` }"
+          :style="{ backgroundImage: `url(${item.image})` }"
         ></div>
         <button
           type="button"
           class="rounded-full border border-lightblue px-[18px] py-2 text-lightblue md:px-[82px] md:py-3.5"
-          @click="openModal"
+          @click="redeem(item)"
         >
           Redeem
         </button>
       </div>
     </div>
-    <Modal :show.sync="show">
+    <Modal :show.sync="show" @close="qrcode = ''">
       <h3 class="mb-[43px] text-2xl">NFT賦能兌換</h3>
       <client-only placeholder="loading...">
-        <vue-qr text="123" :size="288"></vue-qr>
+        <vue-qr :text="qrcode" :size="288"></vue-qr>
       </client-only>
     </Modal>
     <Modal :show.sync="status">
@@ -55,16 +55,17 @@
     </Modal>
   </div>
 </template>
-
+<!-- eslint-disable camelcase -->
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
+import { utils } from 'web3'
 export default {
   async asyncData({ $redreamerApi, store, query }) {
     let activity = []
     if (store.state.token) {
       const {
         data: { data: list },
-      } = await $redreamerApi.redreamer.campaigns()
+      } = await $redreamerApi.redreamer.getNft()
       console.log(list)
       activity = [...list]
     }
@@ -80,9 +81,11 @@ export default {
       show: false,
       status: false,
       activity: [],
+      qrcode: '',
     }
   },
   computed: {
+    ...mapState(['walletObj', 'web3']),
     ...mapGetters(['contractSetting']),
     token({ $store }) {
       return $store.state.token
@@ -116,9 +119,32 @@ export default {
     async getNft() {
       const {
         data: { data: activity },
-      } = await this.$redreamerApi.redreamer.campaigns()
+      } = await this.$redreamerApi.redreamer.getNft()
       console.log(activity)
       this.activity = activity
+    },
+    redeem(nft) {
+      const _this = this
+      const { contract_address, token_id } = nft
+      const campaignId = 'aafeca06-8711-4701-b41d-309720b405b2'
+      const address = this.walletObj.address
+      this.web3.eth.personal.sign(
+        utils.fromUtf8(
+          `campaign_id:${campaignId},contract_address:${contract_address},token_id:${token_id}`
+        ),
+        address,
+        async (err, signature) => {
+          console.log(err, signature)
+          const { data } = await this.$redreamerApi.redreamer.redeem({
+            contract_address,
+            token_id,
+            signature,
+          })
+          console.log(data)
+          _this.qrcode = data.qr_code
+          _this.show = true
+        }
+      )
     },
   },
 }
