@@ -1,30 +1,92 @@
 <template>
   <div
-    class="mb-6 flex flex-col items-center bg-cover pt-[60px] text-center text-[22px] text-white md:mb-0"
+    class="mb-6 flex flex-col items-center bg-cover text-center text-[22px] text-white md:mb-0"
     :class="bg"
   >
-    <div :class="{ 'md:order-2': $route.name !== 'index' }">
-      <template v-if="!walletObj.connected">
-        <button
-          type="button"
-          class="flex items-center rounded-full border border-lightblue bg-secondaryblack px-[22px] py-[13px] text-lightblue"
-          :class="{
-            'mb-2.5': $route.name === 'index',
-            'mb-6 md:mb-0': $route.name !== 'index',
-          }"
-          @click="onConnect"
+    <div
+      class="relative flex w-full justify-end px-6 py-[22px]"
+      :class="{
+        // 'md:pt-4': $route.name === 'index',
+        'md:order-2 md:px-0': $route.name !== 'index',
+      }"
+    >
+      <button
+        type="button"
+        class="flex h-6 w-6 items-center justify-center md:hidden"
+        @click="menuOpen"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="h-6 w-6"
         >
-          連接錢包
-          <img class="ml-[7px]" src="~/assets/images/ic_wallet.png" alt="" />
-        </button>
-      </template>
-      <template v-else>
-        <span class="cursor-pointer hover:underline" @click="disconnect">
-          Unbinding Wallet:
-          {{ walletObj.address.slice(0, 2) }}...
-          {{ walletObj.address.slice(-4) }}
-        </span>
-      </template>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
+      </button>
+      <div
+        :class="{ hidden: !menu }"
+        class="absolute top-full left-0 right-0 bg-secondaryblack px-4 py-4 text-left md:relative md:flex md:space-x-4 md:bg-transparent md:p-0"
+      >
+        <ul
+          class="mb-4 space-y-4 md:mb-0 md:flex md:items-center md:space-y-0 md:space-x-4"
+        >
+          <li><NuxtLink to="/">首頁</NuxtLink></li>
+          <li class="group md:relative">
+            <span
+              class="flex cursor-pointer items-center justify-between"
+              @click="childItemOpen"
+            >
+              NFT購買
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-6 w-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                />
+              </svg>
+            </span>
+            <ul
+              :class="{ hidden: !childItem }"
+              class="left-0 space-y-2 px-4 py-2 group-hover:block md:absolute md:bg-secondaryblack"
+            >
+              <li><NuxtLink to="/nft/intro/normal">一般版</NuxtLink></li>
+              <li><NuxtLink to="/nft/intro/golden">黃金版</NuxtLink></li>
+            </ul>
+          </li>
+          <li><NuxtLink to="/nft/activity">賦能兌換</NuxtLink></li>
+        </ul>
+        <template v-if="!walletObj.connected">
+          <button
+            type="button"
+            class="flex items-center rounded-full border border-lightblue bg-secondaryblack px-[22px] py-[13px] text-lightblue"
+            @click="onConnect"
+          >
+            連接錢包
+            <img class="ml-[7px]" src="~/assets/images/ic_wallet.png" alt="" />
+          </button>
+        </template>
+        <template v-else>
+          <span class="cursor-pointer hover:underline" @click="disconnect">
+            Unbinding Wallet:
+            {{ walletObj.address.slice(0, 2) }}...
+            {{ walletObj.address.slice(-4) }}
+          </span>
+        </template>
+      </div>
     </div>
     <template v-if="$route.name === 'index'">
       <picture>
@@ -74,6 +136,8 @@ export default {
     return {
       walletObj: INITIAL_STATE,
       web3Modal: null,
+      menu: false,
+      childItem: false,
     }
   },
   computed: {
@@ -105,6 +169,11 @@ export default {
       return web3 ? new web3.eth.Contract(NFT_ABI, NFT_CONTRACT_ADDRESS) : null
     },
   },
+  watch: {
+    $route() {
+      this.menu = false
+    },
+  },
   mounted() {
     const _this = this
     _this.web3Modal = new Web3Modal({
@@ -115,6 +184,17 @@ export default {
     })
   },
   methods: {
+    menuOpen() {
+      this.menu = !this.menu
+      if (!this.menu) {
+        this.childItem = false
+      }
+    },
+    childItemOpen() {
+      if (window.matchMedia('(max-width: 780px)')) {
+        this.childItem = !this.childItem
+      }
+    },
     async onConnect() {
       const _this = this
       try {
@@ -148,6 +228,7 @@ export default {
         this.$store.commit('SETFETCHING', true)
         await _this.getAccountAssets()
         await _this.redeemLogin()
+        this.menu = false
       } catch (error) {
         console.log(error)
       }

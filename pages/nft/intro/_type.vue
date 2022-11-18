@@ -52,10 +52,10 @@
         >
           <button
             type="button"
-            class="rounded-full border border-lightblue px-20 py-3 text-lightblue md:px-[98px] md:py-3.5 md:text-xl"
+            class="flex h-[50px] items-center justify-center rounded-full border border-lightblue text-lightblue md:h-[58px] md:w-60 md:text-xl"
             @click="mint"
           >
-            購買
+            虛擬貨幣購買
           </button>
           <button
             type="button"
