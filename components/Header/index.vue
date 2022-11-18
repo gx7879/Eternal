@@ -191,7 +191,7 @@ export default {
       }
     },
     childItemOpen() {
-      if (window.matchMedia('(max-width: 780px)')) {
+      if (window.matchMedia('(max-width: 780px)').matches) {
         this.childItem = !this.childItem
       }
     },

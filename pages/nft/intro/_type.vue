@@ -50,19 +50,29 @@
         <div
           class="mx-auto flex max-w-[200px] flex-col gap-2 md:max-w-none lg:flex-row"
         >
-          <button
-            type="button"
-            class="flex h-[50px] items-center justify-center rounded-full border border-lightblue text-lightblue md:h-[58px] md:w-60 md:text-xl"
-            @click="mint"
-          >
-            虛擬貨幣購買
-          </button>
-          <button
-            type="button"
-            class="flex h-[50px] items-center justify-center rounded-full border border-lightblue text-lightblue md:h-[58px] md:w-60 md:text-xl"
-          >
-            法幣購買
-          </button>
+          <template v-if="contractSetting.can_buy === 'on'">
+            <button
+              type="button"
+              class="flex h-[50px] items-center justify-center rounded-full border border-lightblue text-lightblue md:h-[58px] md:w-60 md:text-xl"
+              @click="mint"
+            >
+              虛擬貨幣購買
+            </button>
+            <button
+              type="button"
+              class="flex h-[50px] items-center justify-center rounded-full border border-lightblue text-lightblue md:h-[58px] md:w-60 md:text-xl"
+            >
+              法幣購買
+            </button>
+          </template>
+          <template v-else>
+            <button
+              type="button"
+              class="flex h-[50px] items-center justify-center rounded-full border border-primarygray text-primarygray md:h-[58px] md:w-60 md:text-xl"
+            >
+              已售完
+            </button>
+          </template>
         </div>
       </div>
     </div>
