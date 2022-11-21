@@ -101,15 +101,11 @@
       class="-mx-5 mb-8 flex overflow-x-hidden bg-lightblue px-[13px] text-2xl text-secondaryblack md:mb-14"
     >
       <div
-        v-for="i of 2"
-        :key="i"
+        v-for="(marquee, index) of marquees"
+        :key="index"
         class="flex flex-none animate-scroll flex-row pt-3.5 pb-2.5 md:py-3.5"
       >
-        永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸
-        永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸
-        永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸
-        永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸
-        永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承
+        {{ marquee + (index % 2 === 1 ? ' ▸' : '') }}
       </div>
     </div>
     <Title class="mx-auto mb-6 md:mb-10">RoadMap</Title>
@@ -162,6 +158,14 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'IndexPage',
+  data() {
+    return {
+      marquees: [
+        '永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承',
+        '永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承 ▸ 永續傳承',
+      ],
+    }
+  },
   head() {
     const { meta_title, meta_keywords, meta_description, fb_og } = this.metaData
     const keywords = JSON.parse(meta_keywords)
