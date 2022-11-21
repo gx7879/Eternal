@@ -200,6 +200,7 @@
         前往賦能兌換頁
       </NuxtLink>
     </div>
+    <Modal :show.sync="notice"><p class="text-2xl">請先連結Metamask</p></Modal>
   </div>
 </template>
 <!-- eslint-disable camelcase -->
@@ -213,10 +214,12 @@ export default {
       normal: {
         title: '標準版NFT',
         price: 750,
+        methods: 'basicMint',
       },
       golden: {
         title: '黃金版NFT',
         price: 900,
+        methods: 'goldMint',
       },
     }
     return {
@@ -227,6 +230,7 @@ export default {
   data() {
     return {
       count: 1,
+      notice: false,
     }
   },
   head() {
@@ -292,14 +296,14 @@ export default {
     async usdtApprove() {
       const _this = this
       const result = await this.usdtContract.methods
-        .approve(USDT_CONTRACT_ADDRESS, 900000000)
+        .approve(USDT_CONTRACT_ADDRESS, _this.price * 1000000)
         .send({ from: _this.walletObj.address })
       console.log(result)
     },
     async nftApprove() {
       const _this = this
       const result = await this.nftContract.methods
-        .approve(NFT_CONTRACT_ADDRESS, 900000000)
+        .approve(NFT_CONTRACT_ADDRESS, _this.price * 1000000)
         .send({ from: _this.walletObj.address })
       console.log(result)
     },
@@ -312,15 +316,17 @@ export default {
     },
     async mint() {
       const _this = this
+      const methods = this.methods
       if (this.web3) {
         await this.usdtApprove()
         await this.allowance()
-        const result = await this.nftContract.methods
-          .goldMint(1)
-          .send({ from: _this.walletObj.address })
+        const result = await this.nftContract.methods[methods](1).send({
+          from: _this.walletObj.address,
+        })
         console.log(result)
       } else {
         console.log('wallet connect')
+        this.notice = true
       }
     },
   },

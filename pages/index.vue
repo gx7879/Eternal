@@ -53,7 +53,7 @@
           <div class="md:flex md:gap-x-40">
             <div class="flex flex-col items-center">
               <div
-                class="mb-3 aspect-square w-full bg-[#888] bg-cover md:mb-6 md:w-[360px]"
+                class="mb-3 aspect-square w-full rounded-md bg-[#888] bg-cover md:mb-6 md:w-[360px]"
                 :style="{
                   backgroundImage: `url(https://phoenix.un05.com/${contractSetting.normal_before_redeem_image_url})`,
                 }"
@@ -74,7 +74,7 @@
             </div>
             <div class="flex flex-col items-center">
               <div
-                class="mb-3 aspect-square w-full bg-[#888] bg-cover md:mb-6 md:w-[360px]"
+                class="mb-3 aspect-square w-full rounded-md bg-[#888] bg-cover md:mb-6 md:w-[360px]"
                 :style="{
                   backgroundImage: `url(https://phoenix.un05.com/${contractSetting.golden_before_redeem_image_url})`,
                 }"
