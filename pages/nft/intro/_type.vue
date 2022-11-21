@@ -311,7 +311,6 @@ export default {
           .goldMint(1)
           .send({ from: _this.walletObj.address })
         console.log(result)
-        await this.nftApprove()
       } else {
         console.log('wallet connect')
       }
