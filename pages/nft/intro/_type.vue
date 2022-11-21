@@ -303,10 +303,18 @@ export default {
         .send({ from: _this.walletObj.address })
       console.log(result)
     },
+    async allowance() {
+      const _this = this
+      const result = await this.usdtContract.methods
+        .allowance(_this.walletObj.address, USDT_CONTRACT_ADDRESS)
+        .call()
+      console.log(result)
+    },
     async mint() {
       const _this = this
       if (this.web3) {
         await this.usdtApprove()
+        await this.allowance()
         const result = await this.nftContract.methods
           .goldMint(1)
           .send({ from: _this.walletObj.address })
