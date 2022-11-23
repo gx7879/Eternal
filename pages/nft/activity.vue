@@ -21,12 +21,13 @@
       NFT
       <template #icon>
         <svg
+          v-if="activity.length > 0"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="absolute -right-8 h-6 w-6"
+          class="absolute -right-8 h-6 w-6 cursor-pointer"
           @click="refreshNft"
         >
           <path

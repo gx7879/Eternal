@@ -1,6 +1,6 @@
 export const actions = {
   async refreshNft(context, activity) {
-    if (activity.length === 0) return
+    if (activity.length === 0) return []
     this._vm.$loading.open()
     const activityCopy = [...activity]
     const idCollect = activityCopy.map((item) => item.token_id).join(',')
