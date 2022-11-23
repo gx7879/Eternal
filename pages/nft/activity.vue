@@ -2,10 +2,8 @@
   <div class="px-5 text-center text-white md:mx-auto md:max-w-7xl">
     <div class="mb-12 items-center md:flex md:gap-x-[90px]">
       <div class="mx-auto mb-5 max-w-[278px] md:w-full md:max-w-none md:flex-1">
-        <div
-          class="w-full rounded-md bg-[#888] bg-cover pb-[100%]"
-          :style="{ backgroundImage: `url(https://phoenix.un05.com/${bg})` }"
-        ></div>
+        <div class="w-full rounded-md bg-[#888] bg-cover pb-[100%]"></div>
+        <!-- :style="{ backgroundImage: `url(https://phoenix.un05.com/${bg})` }" -->
       </div>
       <div class="text-center md:flex-1 md:text-left">
         <h2 class="mb-3 px-9 text-[32px] md:mb-[35px] md:px-0 md:text-4xl">
@@ -21,7 +19,7 @@
     <Separator class="mt-6 mb-8 md:mt-16 md:mb-14 lg:-mx-5"></Separator>
     <Title class="mb-8 md:mb-16">NFT</Title>
     <div class="mb-[100px] grid grid-cols-2 gap-8 px-[11px] lg:grid-cols-3">
-      <div v-for="item of activity" :key="item.id">
+      <div v-for="item of activity" :key="item.token_id">
         <div
           class="mb-6 w-full rounded-md bg-[#888] bg-contain bg-center bg-no-repeat pb-[100%] md:mb-8"
           :style="{ backgroundImage: `url(${item.image})` }"
@@ -35,10 +33,10 @@
         </button>
       </div>
     </div>
-    <Modal :show.sync="show" @close="qrcode = ''">
+    <Modal :show.sync="show" @close="refreshNft">
       <h3 class="mb-[43px] text-2xl">NFT賦能兌換</h3>
       <client-only placeholder="loading...">
-        <vue-qr :text="qrcode" :size="288"></vue-qr>
+        <vue-qr :text="qrcode.qrcode" :size="288"></vue-qr>
       </client-only>
     </Modal>
     <Modal :show.sync="status">
@@ -56,7 +54,7 @@
 import { mapGetters, mapState } from 'vuex'
 import { utils } from 'web3'
 export default {
-  async asyncData({ $redreamerApi, store, query }) {
+  async asyncData({ $redreamerApi, store }) {
     let activity = []
     if (store.state.token) {
       const {
@@ -68,7 +66,6 @@ export default {
 
     return {
       activity,
-      type: query.type,
     }
   },
   data() {
@@ -77,7 +74,10 @@ export default {
       show: false,
       status: false,
       activity: [],
-      qrcode: '',
+      qrcode: {
+        qrcode: '',
+        token: null,
+      },
     }
   },
   computed: {
@@ -85,9 +85,6 @@ export default {
     ...mapGetters(['contractSetting']),
     token({ $store }) {
       return $store.state.token
-    },
-    bg({ type, contractSetting }) {
-      return contractSetting[`${type}_before_redeem_image_url`]
     },
   },
   watch: {
@@ -124,23 +121,36 @@ export default {
       const { contract_address, token_id } = nft
       const campaignId = 'aafeca06-8711-4701-b41d-309720b405b2'
       const address = this.walletObj.address
-      this.web3.eth.personal.sign(
-        utils.fromUtf8(
-          `campaign_id:${campaignId},contract_address:${contract_address},token_id:${token_id}`
-        ),
-        address,
-        async (err, signature) => {
-          console.log(err, signature)
-          const { data } = await this.$redreamerApi.redreamer.redeem({
-            contract_address,
-            token_id,
-            signature,
-          })
-          console.log(data)
-          _this.qrcode = data.qr_code
-          _this.show = true
-        }
-      )
+      try {
+        this.web3.eth.personal.sign(
+          utils.fromUtf8(
+            `campaign_id:${campaignId},contract_address:${contract_address},token_id:${token_id}`
+          ),
+          address,
+          async (err, signature) => {
+            console.log(err, signature)
+            const { data } = await this.$redreamerApi.redreamer.redeem({
+              contract_address,
+              token_id,
+              signature,
+            })
+            console.log(data)
+            _this.qrcode = { qrcode: data.qr_code, token: token_id }
+            _this.show = true
+          }
+        )
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async refreshNft() {
+      const { data } = await this.$api.nftRefresh({ id: this.qrcode.token })
+      console.log(data)
+      // this.activity
+      this.qrcode = {
+        qrcode: '',
+        token: null,
+      }
     },
   },
 }

@@ -5,4 +5,10 @@ export default (axios) => ({
       url: '/api/init',
     })
   },
+  nftRefresh(data) {
+    return axios({
+      method: 'GET',
+      url: `/token/${data.id}`,
+    })
+  },
 })

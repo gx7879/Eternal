@@ -296,7 +296,7 @@ export default {
     async usdtApprove() {
       const _this = this
       const result = await this.usdtContract.methods
-        .approve(USDT_CONTRACT_ADDRESS, _this.price * 1000000)
+        .approve(NFT_CONTRACT_ADDRESS, _this.price * 1000000)
         .send({ from: _this.walletObj.address })
       console.log(result)
     },
