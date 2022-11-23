@@ -32,6 +32,7 @@ export const actions = {
   async nuxtServerInit({ commit }, { $api }) {
     try {
       const { data } = await $api.index.init()
+      console.log(data)
       commit('SETDATA', data.response)
     } catch (error) {
       console.log(error)
