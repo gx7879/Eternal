@@ -65,6 +65,9 @@ export default {
       'Noto+Sans+TC': [100, 300, 400, 500, 700, 900],
     },
   },
+  env: {
+    baseUrl: 'http://phoenix.un05.com',
+  },
   publicRuntimeConfig: {
     redreamerApiUrl: 'https://testnet-api.redreamer.io',
   },

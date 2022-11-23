@@ -3,7 +3,7 @@ export default (axios) => ({
     return axios({
       method: 'GET',
       url: '/api/init',
-      baseURL: 'http://phoenix.un05.com',
+      baseURL: process.env.baseUrl,
     })
   },
   nftRefresh(data) {
