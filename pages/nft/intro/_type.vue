@@ -200,7 +200,8 @@
         前往賦能兌換頁
       </NuxtLink>
     </div>
-    <Modal :show.sync="notice"><p class="text-2xl">請先連結Metamask</p></Modal>
+    <Modal :show.sync="notice"><p class="text-2xl">請先連結錢包</p></Modal>
+    <Modal :show.sync="success"><p class="text-2xl">購買成功</p></Modal>
   </div>
 </template>
 <!-- eslint-disable camelcase -->
@@ -231,6 +232,7 @@ export default {
     return {
       count: 1,
       notice: false,
+      success: false,
     }
   },
   head() {
@@ -276,8 +278,6 @@ export default {
         : null
     },
     nftContract({ web3 }) {
-      // const web3 = web3.web3
-      // console.log(web3)
       return web3 ? new web3.eth.Contract(NFT_ABI, NFT_CONTRACT_ADDRESS) : null
     },
   },
@@ -296,14 +296,7 @@ export default {
     async usdtApprove() {
       const _this = this
       const result = await this.usdtContract.methods
-        .approve(NFT_CONTRACT_ADDRESS, _this.price * 1000000)
-        .send({ from: _this.walletObj.address })
-      console.log(result)
-    },
-    async nftApprove() {
-      const _this = this
-      const result = await this.nftContract.methods
-        .approve(NFT_CONTRACT_ADDRESS, _this.price * 1000000)
+        .approve(NFT_CONTRACT_ADDRESS, _this.price * 1000000 * this.count)
         .send({ from: _this.walletObj.address })
       console.log(result)
     },
@@ -318,14 +311,23 @@ export default {
       const _this = this
       const methods = this.methods
       if (this.web3) {
-        await this.usdtApprove()
-        await this.allowance()
-        const result = await this.nftContract.methods[methods](1).send({
-          from: _this.walletObj.address,
-        })
-        console.log(result)
+        this.$loading.open()
+        try {
+          await this.usdtApprove()
+          await this.allowance()
+          const result = await this.nftContract.methods[methods](
+            this.count
+          ).send({
+            from: _this.walletObj.address,
+          })
+          console.log(result)
+          this.success = true
+        } catch (error) {
+          console.log(error)
+        } finally {
+          this.$loading.hide()
+        }
       } else {
-        console.log('wallet connect')
         this.notice = true
       }
     },

@@ -157,15 +157,11 @@ export default {
       return $store.state.web3
     },
     usdtContract({ web3 }) {
-      // const web3 = web3.web3
-      // console.log(web3)
       return web3
         ? new web3.eth.Contract(USDT_ABI, USDT_CONTRACT_ADDRESS)
         : null
     },
     nftContract({ web3 }) {
-      // const web3 = web3.web3
-      // console.log(web3)
       return web3 ? new web3.eth.Contract(NFT_ABI, NFT_CONTRACT_ADDRESS) : null
     },
   },
@@ -241,12 +237,10 @@ export default {
       // provider.on('close', () => _this.disconnect())
       provider.on('accountsChanged', async (accounts) => {
         // eslint-disable-next-line prefer-destructuring
-        console.log('111', accounts)
         _this.walletObj.address = accounts[0]
         await _this.getAccountAssets()
       })
       provider.on('chainChanged', async (chainId) => {
-        console.log('333', chainId)
         const networkId = await _this.web3?.eth?.net.getId()
         _this.walletObj.chainId = chainId
         _this.walletObj.networkId = networkId
@@ -256,7 +250,6 @@ export default {
     async disconnect() {
       const _this = this
       const web3 = this.web3
-      console.log('123')
       if (web3 && web3.currentProvider && web3.currentProvider.close) {
         await web3.currentProvider.close()
       }
@@ -292,33 +285,19 @@ export default {
         } = await this.$redreamerApi.redreamer.nonce({
           address,
         })
-        console.log(nonce)
         this.web3.eth.personal.sign(
           utils.fromUtf8(`${address.toLowerCase()} ${nonce}`),
           address,
           async (err, signature) => {
-            console.log(err, signature)
+            console.log(err)
             const { data } = await this.$redreamerApi.redreamer.login({
               address,
               signature,
             })
 
-            console.log(data)
             this.$store.commit('SETREDREAMERTOKEN', data.token)
           }
         )
-        // const signatureVal = this.web3.eth.accounts.sign(
-        //   address.toLowerCase() + ' ' + nonce,
-        //   privateKey
-        // )
-        // console.log(signatureVal)
-        // const { data } = await this.$redreamerApi.redreamer.login({
-        //   address,
-        //   signature: signatureVal.signature,
-        // })
-
-        // console.log(data)
-        // this.$store.commit('SETREDREAMERTOKEN', data.token)
       } catch (error) {
         console.log(error)
       }

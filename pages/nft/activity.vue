@@ -25,6 +25,7 @@
           :style="{ backgroundImage: `url(${item.image})` }"
         ></div>
         <button
+          v-if="!item.is_redeem"
           type="button"
           class="rounded-full border border-lightblue px-[18px] py-2 text-lightblue md:px-[82px] md:py-3.5"
           @click="redeem(item)"
@@ -33,10 +34,10 @@
         </button>
       </div>
     </div>
-    <Modal :show.sync="show" @close="refreshNft">
+    <Modal :show.sync="show" @close="close">
       <h3 class="mb-[43px] text-2xl">NFT賦能兌換</h3>
       <client-only placeholder="loading...">
-        <vue-qr :text="qrcode.qrcode" :size="288"></vue-qr>
+        <vue-qr :text="qrcode" :size="288"></vue-qr>
       </client-only>
     </Modal>
     <Modal :show.sync="status">
@@ -60,8 +61,7 @@ export default {
       const {
         data: { data: list },
       } = await $redreamerApi.redreamer.getNft()
-      console.log(list)
-      activity = [...list]
+      activity = await store.dispatch('nft/refreshNft', list)
     }
 
     return {
@@ -74,10 +74,7 @@ export default {
       show: false,
       status: false,
       activity: [],
-      qrcode: {
-        qrcode: '',
-        token: null,
-      },
+      qrcode: '',
     }
   },
   computed: {
@@ -111,47 +108,81 @@ export default {
     },
     async getNft() {
       const {
-        data: { data: activity },
+        data: { data: activityRename },
       } = await this.$redreamerApi.redreamer.getNft()
-      console.log(activity)
+      const activity = await this.$store.dispatch(
+        'nft/refreshNft',
+        activityRename
+      )
       this.activity = activity
+      // this.refreshNft(activity)
     },
-    redeem(nft) {
+    async redeem(nft) {
       const _this = this
       const { contract_address, token_id } = nft
       const campaignId = 'aafeca06-8711-4701-b41d-309720b405b2'
       const address = this.walletObj.address
-      try {
-        this.web3.eth.personal.sign(
-          utils.fromUtf8(
-            `campaign_id:${campaignId},contract_address:${contract_address},token_id:${token_id}`
-          ),
-          address,
-          async (err, signature) => {
-            console.log(err, signature)
-            const { data } = await this.$redreamerApi.redreamer.redeem({
-              contract_address,
-              token_id,
-              signature,
-            })
-            console.log(data)
-            _this.qrcode = { qrcode: data.qr_code, token: token_id }
-            _this.show = true
-          }
+      const sign = () => {
+        return new Promise((resolve, reject) =>
+          _this.web3.eth.personal.sign(
+            utils.fromUtf8(
+              `campaign_id:${campaignId},contract_address:${contract_address},token_id:${token_id}`
+            ),
+            address,
+            (err, signature) => {
+              if (err) reject(err)
+              resolve({ err, signature })
+            }
+          )
         )
+      }
+      try {
+        const { signature } = await sign()
+        this.$loading.open()
+        const { data } = await this.$redreamerApi.redreamer.redeem({
+          contract_address,
+          token_id,
+          signature,
+        })
+        _this.qrcode = data.qr_code
+        _this.show = true
       } catch (error) {
         console.log(error)
+      } finally {
+        this.$loading.hide()
       }
     },
-    async refreshNft() {
-      const { data } = await this.$api.nftRefresh({ id: this.qrcode.token })
-      console.log(data)
-      // this.activity
-      this.qrcode = {
-        qrcode: '',
-        token: null,
-      }
+    async close() {
+      this.qrcode = ''
+      const activity = await this.$store.dispatch(
+        'nft/refreshNft',
+        this.activity
+      )
+      this.activity = activity
+      // await this.refreshNft(this.activity)
     },
+    // async refreshNft(activity) {
+    //   if (activity.length === 0) return
+    //   this.$loading.open()
+    //   const activityCopy = [...activity]
+    //   const idCollect = activityCopy.map((item) => item.token_id).join(',')
+    //   try {
+    //     const { data } = await this.$api.index.nftRefresh({ id: idCollect })
+    //     data.response.forEach((nft) => {
+    //       activityCopy.forEach((item, index) => {
+    //         if (item.token_id === nft.token_id) {
+    //           activityCopy[index] = Object.assign({}, item, nft)
+    //         }
+    //       })
+    //     })
+    //     console.log(activityCopy)
+    //     this.activity = activityCopy
+    //   } catch (error) {
+    //     console.log(error)
+    //   } finally {
+    //     this.$loading.hide()
+    //   }
+    // },
   },
 }
 </script>

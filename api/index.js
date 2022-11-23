@@ -8,7 +8,7 @@ export default (axios) => ({
   nftRefresh(data) {
     return axios({
       method: 'GET',
-      url: `/token/${data.id}`,
+      url: `/tokens/${data.id}`,
     })
   },
 })
