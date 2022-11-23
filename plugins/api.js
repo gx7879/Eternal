@@ -1,7 +1,6 @@
 import Index from '@/api'
 
 export default ({ $axios }, inject) => {
-  console.log(process.env.NODE_ENV)
   const request = $axios.create({
     baseURL:
       process.env.NODE_ENV === 'development' ? 'http://phoenix.un05.com' : '/',
