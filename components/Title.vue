@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div
-      class="mx-auto flex items-center border border-lightblue bg-secondaryblack px-16 py-3 md:px-[76px] md:py-3.5 md:text-2xl"
+      class="relative mx-auto flex items-center border border-lightblue bg-secondaryblack px-16 py-3 md:px-[76px] md:py-3.5 md:text-2xl"
     >
       <picture class="mr-2">
         <source
@@ -11,6 +11,7 @@
         <img src="~/assets/images/ic_dec_blue_phone.png" alt="" />
       </picture>
       <slot></slot>
+      <slot name="icon"></slot>
     </div>
   </div>
 </template>
