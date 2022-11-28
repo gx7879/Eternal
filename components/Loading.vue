@@ -11,10 +11,27 @@
 
 <script>
 export default {
+  props: {
+    componentShow: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
-      show: false,
+      show: this.componentShow || false,
     }
+  },
+  computed: {
+    componentShowBoolean: {
+      get() {
+        return this.componentShow
+      },
+      set(value) {
+        console.log(value)
+        this.$emit('update:componentShow', value)
+      },
+    },
   },
 }
 </script>

@@ -3,6 +3,7 @@
     class="mb-6 flex flex-col items-center bg-cover text-center text-[22px] text-white md:mb-0"
     :class="bg"
   >
+    <Loading component-show.sync="showLoading"></Loading>
     <div
       class="relative flex w-full justify-end px-6 py-[22px]"
       :class="{
@@ -89,13 +90,16 @@
       </div>
     </div>
     <template v-if="$route.name === 'index'">
-      <picture>
-        <source
-          srcset="~/assets/images/vision_web.png"
-          media="(min-width: 768px)"
-        />
-        <img src="~/assets/images/vision_phone.png" alt="" />
-      </picture>
+      <lottie
+        :options="webLottieOptions"
+        class="hidden max-w-[1440px] md:block"
+        @animCreated="handleAnimation"
+      />
+      <lottie
+        :options="phoneLottieOptions"
+        class="md:hidden"
+        @animCreated="handleAnimation"
+      />
     </template>
     <template v-else>
       <NuxtLink to="/">
@@ -114,6 +118,7 @@
 <script>
 import Web3, { utils } from 'web3'
 import Web3Modal from 'web3modal'
+import lottie from 'vue-lottie/src/lottie.vue'
 import { USDT_ABI, NFT_ABI } from '@/web3/abi'
 import {
   providerOptions,
@@ -121,6 +126,8 @@ import {
   NFT_CONTRACT_ADDRESS,
 } from '@/web3/config'
 import { getChainData } from '@/web3/tools'
+import * as webAnimationData from '~/assets/animation/vision_web_key.json'
+import * as phoneAnimationData from '~/assets/animation/vision_phone_key.json'
 const INITIAL_STATE = {
   // web3: null,
   // provider: null,
@@ -132,12 +139,28 @@ const INITIAL_STATE = {
 }
 export default {
   name: 'Header',
+  components: {
+    lottie,
+  },
   data() {
     return {
       walletObj: INITIAL_STATE,
       web3Modal: null,
       menu: false,
       childItem: false,
+      showLoading: true,
+      webLottieOptions: {
+        animationData: webAnimationData.default,
+        onComplete(anim) {
+          console.log(anim)
+        },
+      },
+      phoneLottieOptions: {
+        animationData: phoneAnimationData.default,
+        onComplete(anim) {
+          console.log(anim)
+        },
+      },
     }
   },
   computed: {
@@ -180,6 +203,12 @@ export default {
     })
   },
   methods: {
+    handleAnimation: function (anim) {
+      anim.addEventListener('DOMLoaded', (ani) => {
+        this.$loading.hide()
+      })
+      anim.setSubframe(false)
+    },
     menuOpen() {
       this.menu = !this.menu
       if (!this.menu) {
