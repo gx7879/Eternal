@@ -1,7 +1,7 @@
 <template>
   <!-- refer to: https://hackmd.io/@yuna9068/HJgG-gh0w -->
   <div
-    v-if="showVal"
+    v-if="show"
     class="fixed left-0 top-0 right-0 bottom-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,1)]"
   >
     <!-- <div class="text-2xl text-white">loading...</div> -->
@@ -11,20 +11,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      show: false,
-    }
-  },
-  computed: {
-    showVal: {
-      get() {
-        return this.show
-      },
-      set(val) {
-        console.log(val)
-        this.$emit('update:show', val)
-      },
+  props: {
+    show: {
+      type: Boolean,
+      default: false,
     },
   },
 }

@@ -3,7 +3,6 @@
     class="mb-6 flex flex-col items-center bg-cover text-center text-[22px] text-white md:mb-0"
     :class="bg"
   >
-    <Loading component-show.sync="showLoading"></Loading>
     <div
       class="relative flex w-full justify-end px-6 py-[22px]"
       :class="{
@@ -90,6 +89,7 @@
       </div>
     </div>
     <template v-if="$route.name === 'index'">
+      <v-loading :show.sync="showLoading"></v-loading>
       <lottie
         :options="webLottieOptions"
         class="hidden max-w-[1440px] md:block"
@@ -151,15 +151,9 @@ export default {
       showLoading: true,
       webLottieOptions: {
         animationData: webAnimationData.default,
-        onComplete(anim) {
-          console.log(anim)
-        },
       },
       phoneLottieOptions: {
         animationData: phoneAnimationData.default,
-        onComplete(anim) {
-          console.log(anim)
-        },
       },
     }
   },
@@ -205,7 +199,8 @@ export default {
   methods: {
     handleAnimation: function (anim) {
       anim.addEventListener('DOMLoaded', (ani) => {
-        this.$loading.hide()
+        // this.$loading.hide()
+        this.showLoading = false
       })
       anim.setSubframe(false)
     },
