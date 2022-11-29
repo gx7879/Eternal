@@ -51,7 +51,7 @@
             超強賦能，永世服務！<br />首波賦能：喜悅帝寶靈骨塔優惠折抵
           </p>
           <div class="md:overflow-x-auto">
-            <div class="md:flex md:gap-x-40">
+            <div class="md:grid md:grid-cols-2 md:gap-x-40">
               <div class="flex flex-col items-center">
                 <div
                   class="mb-3 aspect-square w-full rounded-md bg-[#888] bg-cover md:mb-6 md:w-[360px]"
@@ -201,6 +201,13 @@ export default {
           hid: 'og:site_name',
           name: 'og:site_name',
           content: fb_og.og_site_name,
+        },
+      ],
+      link: [
+        {
+          rel: 'preload',
+          as: 'image',
+          href: '/loading.gif',
         },
       ],
     }

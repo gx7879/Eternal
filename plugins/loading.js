@@ -7,19 +7,20 @@ const loading = {
     //   el: document.createElement('div')
     // })
     const profile = new Loading()
-    const vm = profile.$mount()
+    const vm = profile.$mount(document.createElement('div'))
     document.body.appendChild(vm.$el)
 
     const myLoadingMethod = {
-      open() {
+      open(text = '') {
         profile.show = true
+        profile.text = text
       },
-      hide(){
+      hide() {
         profile.show = false
-      }
+      },
     }
     Vue.prototype.$loading = myLoadingMethod
-  }
+  },
 }
 
 Vue.use(loading)

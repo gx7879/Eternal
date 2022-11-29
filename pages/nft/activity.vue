@@ -2,8 +2,9 @@
   <div class="px-5 text-center text-white md:mx-auto md:max-w-7xl">
     <div class="mb-12 items-center md:flex md:gap-x-[90px]">
       <div class="mx-auto mb-5 max-w-[278px] md:w-full md:max-w-none md:flex-1">
-        <div class="w-full rounded-md bg-[#888] bg-cover pb-[100%]"></div>
-        <!-- :style="{ backgroundImage: `url(https://phoenix.un05.com/${bg})` }" -->
+        <div class="aspect-square w-full overflow-hidden rounded-md bg-[#888]">
+          <img src="@/assets/images/NFT_gold_open.webp" />
+        </div>
       </div>
       <div class="text-center md:flex-1 md:text-left">
         <h2 class="mb-3 px-9 text-[32px] md:mb-[35px] md:px-0 md:text-4xl">

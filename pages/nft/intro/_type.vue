@@ -311,7 +311,7 @@ export default {
       const _this = this
       const methods = this.methods
       if (this.web3) {
-        this.$loading.open()
+        this.$loading.open('交易處理中')
         try {
           await this.usdtApprove()
           await this.allowance()
