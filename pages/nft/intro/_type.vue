@@ -3,10 +3,8 @@
     <div class="mb-12 md:flex md:gap-x-[90px]">
       <div class="mx-auto mb-5 max-w-[278px] md:w-full md:max-w-none md:flex-1">
         <div
-          class="w-full rounded-md bg-[#888] bg-cover pb-[100%]"
-          :style="{
-            backgroundImage: `url(https://phoenix.un05.com/${bg})`,
-          }"
+          class="w-full rounded-md bg-[#888] bg-contain bg-center bg-no-repeat pb-[100%]"
+          :lazy-background="`https://phoenix.un05.com/${bg}`"
         ></div>
       </div>
       <div class="text-center md:flex-1 md:text-left">
@@ -121,32 +119,36 @@
             >
               <div class="flex flex-col">
                 <img
+                  v-lazy-load
                   class="mb-6 md:mb-2.5"
-                  src="~/assets/images/img_phone_1.png"
+                  data-src="~/assets/images/img_phone_1.png"
                   alt=""
                 />
                 <span>重建委員會</span>
               </div>
               <div class="flex flex-col">
                 <img
+                  v-lazy-load
                   class="mb-6 md:mb-2.5"
-                  src="~/assets/images/img_phone_2.png"
+                  data-src="~/assets/images/img_phone_2.png"
                   alt=""
                 />
                 <span>建物所有權狀</span>
               </div>
               <div class="flex flex-col">
                 <img
+                  v-lazy-load
                   class="mb-6 md:mb-2.5"
-                  src="~/assets/images/img_phone_3.png"
+                  data-src="~/assets/images/img_phone_3.png"
                   alt=""
                 />
                 <span>土地所有權狀</span>
               </div>
               <div class="flex flex-col">
                 <img
+                  v-lazy-load
                   class="mb-6 md:mb-2.5"
-                  src="~/assets/images/img_phone_4.png"
+                  data-src="~/assets/images/img_phone_4.png"
                   alt=""
                 />
                 <span>永久使用權狀</span>
@@ -200,8 +202,10 @@
         前往賦能兌換頁
       </NuxtLink>
     </div>
-    <Modal :show.sync="notice"><p class="text-2xl">請先連結錢包</p></Modal>
-    <Modal :show.sync="success"><p class="text-2xl">購買成功</p></Modal>
+    <LazyModal :show.sync="notice"
+      ><p class="text-2xl">請先連結錢包</p></LazyModal
+    >
+    <LazyModal :show.sync="success"><p class="text-2xl">購買成功</p></LazyModal>
   </div>
 </template>
 <!-- eslint-disable camelcase -->

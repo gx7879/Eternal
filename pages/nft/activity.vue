@@ -2,8 +2,10 @@
   <div class="px-5 text-center text-white md:mx-auto md:max-w-7xl">
     <div class="mb-12 items-center md:flex md:gap-x-[90px]">
       <div class="mx-auto mb-5 max-w-[278px] md:w-full md:max-w-none md:flex-1">
-        <div class="aspect-square w-full overflow-hidden rounded-md bg-[#888]">
-          <img src="@/assets/images/NFT_gold_open.webp" />
+        <div
+          class="flex aspect-square w-full items-center justify-center overflow-hidden rounded-md bg-[#888]"
+        >
+          <img v-lazy-load data-src="@/assets/images/NFT_gold_open.webp" />
         </div>
       </div>
       <div class="text-center md:flex-1 md:text-left">
@@ -55,20 +57,20 @@
         </button>
       </div>
     </div>
-    <Modal :show.sync="show" @close="close">
+    <LazyModal :show.sync="show" @close="close">
       <h3 class="mb-[43px] text-2xl">NFT賦能兌換</h3>
       <client-only placeholder="loading...">
         <vue-qr :text="qrcode" :size="288"></vue-qr>
       </client-only>
-    </Modal>
-    <Modal :show.sync="status">
+    </LazyModal>
+    <LazyModal :show.sync="status">
       <img
         class="mx-auto mb-7"
         src="~/assets/images/ic_pop_success.png"
         alt=""
       />
       <p class="text-2xl">賦能已兌換完成</p>
-    </Modal>
+    </LazyModal>
   </div>
 </template>
 <!-- eslint-disable camelcase -->

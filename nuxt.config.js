@@ -43,6 +43,13 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    [
+      'nuxt-lazy-load',
+      {
+        directiveOnly: true,
+        defaultImage: '/images/default-image.gif',
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
