@@ -4,7 +4,7 @@
     :class="bg"
   >
     <div
-      class="relative flex w-full justify-end px-6 py-[22px]"
+      class="relative z-50 flex w-full justify-end px-6 py-[22px]"
       :class="{
         // 'md:pt-4': $route.name === 'index',
         'md:order-2 md:px-0': $route.name !== 'index',
