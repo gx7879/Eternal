@@ -69,8 +69,10 @@ export default {
   },
   googleFonts: {
     families: {
-      'Noto+Sans+TC': [100, 300, 400, 500, 700, 900],
+      'Noto+Sans+TC': [400, 500, 700, 900],
     },
+    display: 'swap',
+    base64: false,
   },
   env: {
     baseUrl: 'http://phoenix.un05.com',
