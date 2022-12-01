@@ -66,6 +66,35 @@ export default {
         autoprefixer: {},
       },
     },
+    uglify: {
+      uglifyOptions: {
+        comments: false,
+        compress: {
+          drop_console: true,
+        },
+      },
+    },
+    html: {
+      minify: {
+        collapseBooleanAttributes: true,
+        collapseWhitespace: false,
+        decodeEntities: true,
+        minifyCSS: true,
+        minifyJS: true,
+        processConditionalComments: true,
+        removeAttributeQuotes: false,
+        removeComments: false,
+        removeEmptyAttributes: true,
+        removeOptionalTags: false,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: false,
+        removeStyleLinkTypeAttributes: false,
+        removeTagWhitespace: false,
+        sortClassName: false,
+        trimCustomFragments: true,
+        useShortDoctype: true,
+      },
+    },
   },
   googleFonts: {
     families: {
