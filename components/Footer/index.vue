@@ -1,7 +1,7 @@
 <template>
   <div class="mb-6 text-center text-white">
     <img
-      class="mx-auto mb-6"
+      class="mx-auto mb-6 h-24 w-24"
       src="~/assets/images/ic_logo_chillnow.png"
       alt=""
     />

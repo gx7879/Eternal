@@ -71,7 +71,6 @@ export default {
     families: {
       'Noto+Sans+TC': [400, 500, 700, 900],
     },
-    display: 'swap',
     base64: false,
   },
   env: {

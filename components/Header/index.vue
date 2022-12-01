@@ -76,7 +76,11 @@
             @click="onConnect"
           >
             連接錢包
-            <img class="ml-[7px]" src="~/assets/images/ic_wallet.png" alt="" />
+            <img
+              class="ml-[7px] h-6 w-6"
+              src="~/assets/images/ic_wallet.png"
+              alt=""
+            />
           </button>
         </template>
         <template v-else>
