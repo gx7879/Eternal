@@ -94,12 +94,12 @@
     </div>
     <template v-if="$route.name === 'index'">
       <v-loading :show.sync="showLoading"></v-loading>
-      <lottie
+      <Lottie
         :options="webLottieOptions"
         class="hidden max-w-[1440px] md:block"
         @animCreated="handleAnimation"
       />
-      <lottie
+      <Lottie
         :options="phoneLottieOptions"
         class="md:hidden"
         @animCreated="handleAnimation"
@@ -122,7 +122,6 @@
 <script>
 import Web3, { utils } from 'web3'
 import Web3Modal from 'web3modal'
-import lottie from 'vue-lottie/src/lottie.vue'
 import { USDT_ABI, NFT_ABI } from '@/web3/abi'
 import {
   providerOptions,
@@ -132,6 +131,8 @@ import {
 import { getChainData } from '@/web3/tools'
 import * as webAnimationData from '~/assets/animation/vision_web_key.json'
 import * as phoneAnimationData from '~/assets/animation/vision_phone_key.json'
+const webData = webAnimationData
+const phoneData = phoneAnimationData
 const INITIAL_STATE = {
   // web3: null,
   // provider: null,
@@ -143,9 +144,6 @@ const INITIAL_STATE = {
 }
 export default {
   name: 'Header',
-  components: {
-    lottie,
-  },
   data() {
     return {
       walletObj: INITIAL_STATE,
@@ -154,10 +152,10 @@ export default {
       childItem: false,
       showLoading: true,
       webLottieOptions: {
-        animationData: webAnimationData.default,
+        animationData: Object.freeze(webData).default,
       },
       phoneLottieOptions: {
-        animationData: phoneAnimationData.default,
+        animationData: Object.freeze(phoneData).default,
       },
     }
   },
@@ -206,7 +204,6 @@ export default {
         // this.$loading.hide()
         this.showLoading = false
       })
-      anim.setSubframe(false)
     },
     menuOpen() {
       this.menu = !this.menu
