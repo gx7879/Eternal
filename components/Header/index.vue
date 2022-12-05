@@ -63,11 +63,15 @@
               :class="{ hidden: !childItem }"
               class="left-0 space-y-2 px-4 py-2 group-hover:block md:absolute md:bg-secondaryblack"
             >
-              <li><NuxtLink to="/nft/intro/normal">一般版</NuxtLink></li>
-              <li><NuxtLink to="/nft/intro/golden">黃金版</NuxtLink></li>
+              <li>
+                <NuxtLink to="/nft/intro/normal" no-prefetch>一般版</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/nft/intro/golden" no-prefetch>黃金版</NuxtLink>
+              </li>
             </ul>
           </li>
-          <li><NuxtLink to="/nft/activity">賦能兌換</NuxtLink></li>
+          <li><NuxtLink to="/nft/activity" no-prefetch>賦能兌換</NuxtLink></li>
         </ul>
         <template v-if="!walletObj.connected">
           <button

@@ -60,6 +60,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    analyze: true,
     postcss: {
       plugins: {
         tailwindcss: {},
@@ -93,6 +94,65 @@ export default {
         sortClassName: false,
         trimCustomFragments: true,
         useShortDoctype: true,
+      },
+    },
+    optimization: {
+      runtimeChunk: true,
+      splitChunks: {
+        chunks: 'all',
+        minSize: 30000,
+        maxSize: 0,
+        minChunks: 1,
+        cacheGroups: {
+          vendor: {
+            // chunks: 'all',
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            minChunks: 1,
+            maxInitialRequests: 5,
+            priority: 10,
+          },
+          // libs: {
+          //   // 第三方库
+          //   name: 'chunk-libs',
+          //   test: /[\\/]node_modules[\\/]/,
+          //   priority: 10,
+          // },
+          web3: {
+            name: 'chunk-web3',
+            test: /[\\/]node_modules[\\/]web3[\\/]/,
+            priority: 20,
+          },
+          web3modal: {
+            name: 'chunk-web3modal',
+            test: /[\\/]node_modules[\\/]web3modal[\\/]/,
+            priority: 30,
+          },
+          common: {
+            chunks: 'all',
+            test: /[\\/]src[\\/]js[\\/]/,
+            name: 'common',
+            minChunks: 3,
+            maxInitialRequests: 5,
+            priority: 0,
+          },
+          // commons: {
+          //   // 公共模块包
+          //   name: 'chunk-commons',
+          //   minChunks: 2,
+          //   priority: 0,
+          //   reuseExistingChunk: true,
+          // },
+          styles: {
+            name: 'styles',
+            test: /\.(sa|sc|c)ss$/,
+            chunks: 'all',
+            enforce: true,
+          },
+          // runtimeChunk: {
+          //   name: 'manifest',
+          // },
+        },
       },
     },
   },

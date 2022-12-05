@@ -198,6 +198,7 @@
       <NuxtLink
         :to="{ path: '/nft/activity', query: { type } }"
         class="mb-[93px] inline-block rounded-full border border-lightblue px-20 py-3 text-lightblue"
+        no-prefetch
       >
         前往賦能兌換頁
       </NuxtLink>

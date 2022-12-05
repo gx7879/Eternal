@@ -67,6 +67,7 @@
                 <NuxtLink
                   :to="{ name: 'nft-intro-type', params: { type: 'normal' } }"
                   class="mt-5 mb-8 rounded-full border border-lightblue px-[66px] py-3 text-lightblue md:mt-10 md:mb-0 md:px-[60px] md:py-3.5 md:text-xl"
+                  no-prefetch
                 >
                   ＋ 看更多
                 </NuxtLink>
@@ -86,6 +87,7 @@
                 <NuxtLink
                   :to="{ name: 'nft-intro-type', params: { type: 'golden' } }"
                   class="mt-5 rounded-full border border-lightblue px-[66px] py-3 text-lightblue md:mt-10 md:px-[60px] md:py-3.5 md:text-xl"
+                  no-prefetch
                 >
                   ＋ 看更多
                 </NuxtLink>
